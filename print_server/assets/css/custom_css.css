@@ -252,6 +252,19 @@
 .outlet_phone {
   text-align: center;
 }
+.copy_button {
+  margin-bottom: .5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.outlet_token {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 .outlet_address {
   margin-top: 15px;
 }

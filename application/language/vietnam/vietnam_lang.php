@@ -1,4 +1,4 @@
-<?php 
+<?php
 $lang['view_details'] = 'Xem chi tiết';
 $lang['edit'] = 'Chỉnh sửa';
 $lang['add'] = 'Thêm';
@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'Thêm vào giỏ hàng';
 $lang['add_customer'] = 'Thêm khách hàng';
 $lang['name'] = 'Tên';
 $lang['email'] = 'Email';
+$lang['generate_key'] = 'Tạo khóa';
 $lang['email_phone'] = 'Email / Điện thoại';
 $lang['reset_step_1'] = 'Bước 1: Đặt lại mật khẩu';
 $lang['reset_step_2'] = 'Bước 2: Đặt lại mật khẩu';
@@ -2302,7 +2303,7 @@ $lang['Booked'] = 'Đã đặt chỗ';
 $lang['Waiting'] = 'Đang chờ';
 $lang['Completed'] = 'Hoàn tất';
 $lang['Cancelled'] = 'Đã hủy';
-$lang['item_sync_notification']='Mở một tab mới và thêm một mục, sau khi thêm mục mới, hãy nhấp vào nút này và sau khi nhấp vào nút này, bạn sẽ nhận được mục mới trong danh sách.';
+$lang['item_sync_notification'] = 'Mở một tab mới và thêm một mục, sau khi thêm mục mới, hãy nhấp vào nút này và sau khi nhấp vào nút này, bạn sẽ nhận được mục mới trong danh sách.';
 $lang['show_business_name'] = 'Hiển thị Tên doanh nghiệp';
 $lang['business_name_arabic'] = 'Tên doanh nghiệp tiếng Ả Rập';
 $lang['show_outlet_label'] = 'Hiển thị Nhãn cửa hàng';

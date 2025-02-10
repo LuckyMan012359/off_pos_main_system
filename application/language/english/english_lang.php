@@ -1,4 +1,4 @@
-<?php 
+<?php
 $lang['view_details'] = 'View Details';
 $lang['edit'] = 'Edit';
 $lang['add'] = 'Add';
@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'Add to Cart';
 $lang['add_customer'] = 'Add Customer';
 $lang['name'] = 'Name';
 $lang['email'] = 'Email';
+$lang['generate_key'] = "Generate Key";
 $lang['email_phone'] = 'Email / Phone';
 $lang['reset_step_1'] = 'Reset Password Step 1';
 $lang['reset_step_2'] = 'Reset Password Step 2';
@@ -2348,8 +2349,8 @@ $lang['round_whole_number'] = 'Round to nearest whole number';
 $lang['round_decimal_number_0_05'] = 'Round to nearest decimal (multiple of 0.05)';
 $lang['round_decimal_number_1'] = 'Round to nearest decimal (multiple of 0.1)';
 $lang['round_decimal_number_0_5'] = 'Round to nearest decimal (multiple of 0.5)';
-$lang['rounding_note'] = 'Example: <br><b>Round to nearest 
-whole number:</b> <br> 2.01 => 2, <b><small>[2.01-2.49 will be count as 2]</small></b> <br> 2.50 => 3, <b><small>[2.50-2.99 will be count as 3]</small></b> <br> <b>Round to nearest 
+$lang['rounding_note'] = 'Example: <br><b>Round to nearest
+whole number:</b> <br> 2.01 => 2, <b><small>[2.01-2.49 will be count as 2]</small></b> <br> 2.50 => 3, <b><small>[2.50-2.99 will be count as 3]</small></b> <br> <b>Round to nearest
 decimal (multiple of 0.05):</b> <br> 2.11 => 2.10 <br> 2.12 => 2.10 <br> 2.13 => 2.15';
 $lang['print_server_url'] = 'IPV4 Address';
 $lang['HowtogetIPv4Address'] = 'How to get IPV4 Address?';
@@ -2490,16 +2491,16 @@ $lang['open_cash_drawer'] = 'Open Chash Drawer';
 
 $lang['medicine_expire_report'] = 'Expire Soon Report';
 $lang['expire_within'] = 'Expire Within';
-$lang['hour_s']='Hour(s)';
-$lang['booking']='Booking';
-$lang['service_seller']='Service Seller';
-$lang['start_date_time']='Start Date Time';
-$lang['end_date_time']='End Date Time';
-$lang['Booked']='Booked';
-$lang['Waiting']='Waiting';
-$lang['Completed']='Completed';
-$lang['Cancelled']='Cancelled';
-$lang['item_sync_notification']='Open a new tab and go to add an item, after adding the new item then, click this button, and after clicking this button, you will get the new item on the list.';
+$lang['hour_s'] = 'Hour(s)';
+$lang['booking'] = 'Booking';
+$lang['service_seller'] = 'Service Seller';
+$lang['start_date_time'] = 'Start Date Time';
+$lang['end_date_time'] = 'End Date Time';
+$lang['Booked'] = 'Booked';
+$lang['Waiting'] = 'Waiting';
+$lang['Completed'] = 'Completed';
+$lang['Cancelled'] = 'Cancelled';
+$lang['item_sync_notification'] = 'Open a new tab and go to add an item, after adding the new item then, click this button, and after clicking this button, you will get the new item on the list.';
 $lang['show_business_name'] = 'Show Business Name';
 $lang['business_name_arabic'] = 'Business Name Arabic';
 $lang['show_outlet_label'] = 'Show Outlet Label';
@@ -2679,14 +2680,3 @@ $lang['technician'] = 'Technician';
 $lang['include_discount'] = '(Incl. Discount)';
 $lang['sale_return_amount'] = 'Sale Return Amount';
 $lang['installment_down_and_collection_register'] = 'Installment Down payment & Collection (+)';
-
-
-
-
-
-
-
-
-
-
-

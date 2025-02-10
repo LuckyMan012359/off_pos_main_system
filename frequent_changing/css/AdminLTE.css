@@ -5246,7 +5246,7 @@ table.text-center th {
  .callout.callout-warning,
  .callout.callout-info,
  .callout.callout-success,
- 
+
  /* .alert-success,
  .alert-danger,
  .alert-error,
@@ -6260,6 +6260,19 @@ table.text-center th {
 .outlet_phone {
   text-align: center;
 }
+.copy_button {
+  margin-bottom: .5rem;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.outlet_token {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
 .outlet-box .outlet_code {
   color: #858585;
 }
@@ -6288,5 +6301,3 @@ table.text-center th {
 .main-header .navbar-custom-menu:last-child .my-dropdown-menu .my-dropdown-sub-menu {
   left: -250px !important;
 }
-
-

@@ -584,204 +584,204 @@ class Authentication extends Cl_Controller {
         }
         $this->form_validation->set_rules('email_address', lang('email_address'), 'required|max_length[50]');
         $this->form_validation->set_rules('password', lang('password'), "required|max_length[25]");
-        // if ($this->form_validation->run() == TRUE) {
-        //     $email_address = htmlspecialcharscustom($this->input->post($this->security->xss_clean('email_address')));
-        //     $password = md5($this->input->post($this->security->xss_clean('password')));
-        //     $user_information = $this->Authentication_model->getUserInformation($email_address, $password);
-        //     if ($user_information) {
-        //         $view_purchase_price =  '';
-        //         $company_info = $this->Authentication_model->getCompanyInformation($user_information->company_id);
-        //         $module_hide_show = getAllChildModule();
-        //         $moduleArr = [];
-        //         if($module_hide_show){
-        //             foreach($module_hide_show as $module){
-        //                 array_push($moduleArr, $module->module_name.'-YES');
-        //             }
-        //         }
-        //         if($user_information->id == '1' && $user_information->role == "1"){
-        //             $getAccess = $this->Common_model->getAllAccess();
-        //         }else{
-        //             if($company_info->id != '1'){
-        //                 $today = date('Y-m-d');
-        //                 if($company_info->expired_date < $today){
-        //                     $this->session->set_flashdata('exception_1', "Your Account expired on " . dateFormatMaster($company_info->expired_date) . ", please make your payment or contact with admin.");
-        //                     redirect('Authentication/index');
-        //                 }
-        //                 if($company_info->is_active == '2' || $company_info->del_status == 'Deleted'){
-        //                     $this->session->set_flashdata('exception_1', 'This Company is not active or Payment is not clear');
-        //                     redirect('Authentication/index');
-        //                 }
-        //             }
-        //             if($user_information->will_login == 'No'){
-        //                 $this->session->set_flashdata('exception_1', lang('incorrect_email_password'));
-        //                 redirect('Authentication/index');
-        //             }
-        //             if ($user_information->active_status != 'Active') {
-        //                 $this->session->set_flashdata('exception_1', lang('user_not_active'));
-        //                 redirect('Authentication/index');
-        //             }
-        //             $getAccess = $this->Common_model->getRolePermissionByRoleId($user_information->role);
-        //         }
-        //         $menu_access_container = array();
-        //         if($user_information->role=="1" && $user_information->id == "1"){
-        //             if (isset($getAccess)) {
-        //                 foreach ($getAccess as $value) {
-        //                     array_push($menu_access_container, $value->function_name."-".$value->parent_id);
-        //                     if($value->function_name == 'view_purchase_price' && $value->parent_id == '138'){
-        //                         $view_purchase_price =  'Yes';
-        //                     }
-        //                 }
-        //             }
-        //         }else{
-        //             if (isset($getAccess)) {
-        //                 $getAccesRow = '';
-        //                 foreach ($getAccess as $value) {
-        //                     $getAccesRow = $this->Common_model->getAllByCustomRowId($value->access_child_id,"id",'tbl_access');
-        //                     if($getAccesRow){
-        //                         array_push($menu_access_container, $getAccesRow->function_name."-".$getAccesRow->parent_id);
-        //                         if($getAccesRow->function_name == 'view_purchase_price' && $getAccesRow->parent_id == '138'){
-        //                             $view_purchase_price =  'Yes';
-        //                         }
-        //                     }
-        //                 }
-        //             }
-        //         }
+        if ($this->form_validation->run() == TRUE) {
+            $email_address = htmlspecialcharscustom($this->input->post($this->security->xss_clean('email_address')));
+            $password = md5($this->input->post($this->security->xss_clean('password')));
+            $user_information = $this->Authentication_model->getUserInformation($email_address, $password);
+            if ($user_information) {
+                $view_purchase_price =  '';
+                $company_info = $this->Authentication_model->getCompanyInformation($user_information->company_id);
+                $module_hide_show = getAllChildModule();
+                $moduleArr = [];
+                if($module_hide_show){
+                    foreach($module_hide_show as $module){
+                        array_push($moduleArr, $module->module_name.'-YES');
+                    }
+                }
+                if($user_information->id == '1' && $user_information->role == "1"){
+                    $getAccess = $this->Common_model->getAllAccess();
+                }else{
+                    if($company_info->id != '1'){
+                        $today = date('Y-m-d');
+                        if($company_info->expired_date < $today){
+                            $this->session->set_flashdata('exception_1', "Your Account expired on " . dateFormatMaster($company_info->expired_date) . ", please make your payment or contact with admin.");
+                            redirect('Authentication/index');
+                        }
+                        if($company_info->is_active == '2' || $company_info->del_status == 'Deleted'){
+                            $this->session->set_flashdata('exception_1', 'This Company is not active or Payment is not clear');
+                            redirect('Authentication/index');
+                        }
+                    }
+                    if($user_information->will_login == 'No'){
+                        $this->session->set_flashdata('exception_1', lang('incorrect_email_password'));
+                        redirect('Authentication/index');
+                    }
+                    if ($user_information->active_status != 'Active') {
+                        $this->session->set_flashdata('exception_1', lang('user_not_active'));
+                        redirect('Authentication/index');
+                    }
+                    $getAccess = $this->Common_model->getRolePermissionByRoleId($user_information->role);
+                }
+                $menu_access_container = array();
+                if($user_information->role=="1" && $user_information->id == "1"){
+                    if (isset($getAccess)) {
+                        foreach ($getAccess as $value) {
+                            array_push($menu_access_container, $value->function_name."-".$value->parent_id);
+                            if($value->function_name == 'view_purchase_price' && $value->parent_id == '138'){
+                                $view_purchase_price =  'Yes';
+                            }
+                        }
+                    }
+                }else{
+                    if (isset($getAccess)) {
+                        $getAccesRow = '';
+                        foreach ($getAccess as $value) {
+                            $getAccesRow = $this->Common_model->getAllByCustomRowId($value->access_child_id,"id",'tbl_access');
+                            if($getAccesRow){
+                                array_push($menu_access_container, $getAccesRow->function_name."-".$getAccesRow->parent_id);
+                                if($getAccesRow->function_name == 'view_purchase_price' && $getAccesRow->parent_id == '138'){
+                                    $view_purchase_price =  'Yes';
+                                }
+                            }
+                        }
+                    }
+                }
 
-        //         //User Information
-        //         $register_status = $this->Common_model->getRegisterStatus($user_information->id);
-        //         // Initialize default printer settings
-        //         $login_session = [
-        //             'print_format' => '',
-        //             'characters_per_line' => '',
-        //             'printer_ip_address' => '',
-        //             'printer_port' => '',
-        //             'qr_code_type' => '',
-        //             'invoice_print' => '',
-        //             'fiscal_printer_status' => '',
-        //             'open_cash_drawer_when_printing_invoice' => '',
-        //             'print_server_url_invoice' => '',
-        //             'inv_qr_code_status' => '',
-        //             'register_status' => $register_status,
-        //             'view_purchase_price' => $view_purchase_price,
-        //             'function_access' => $menu_access_container,
-        //         ];
+                //User Information
+                $register_status = $this->Common_model->getRegisterStatus($user_information->id);
+                // Initialize default printer settings
+                $login_session = [
+                    'print_format' => '',
+                    'characters_per_line' => '',
+                    'printer_ip_address' => '',
+                    'printer_port' => '',
+                    'qr_code_type' => '',
+                    'invoice_print' => '',
+                    'fiscal_printer_status' => '',
+                    'open_cash_drawer_when_printing_invoice' => '',
+                    'print_server_url_invoice' => '',
+                    'inv_qr_code_status' => '',
+                    'register_status' => $register_status,
+                    'view_purchase_price' => $view_purchase_price,
+                    'function_access' => $menu_access_container,
+                ];
 
-        //         // Check register status
-        //         if ($register_status == '1') {
-        //             $counter_id = $this->Common_model->getCounterIdFromRegister($user_information->id);
-        //             if ($counter_id) {
-        //                 $printer_id = $this->Common_model->getPrinterIdByCounterId($counter_id);
-        //                 $printer_info = $this->Common_model->getPrinterInfoById($printer_id);
-        //                 if ($printer_info) {
-        //                     $login_session['print_format'] = $printer_info->print_format;
-        //                     $login_session['characters_per_line'] = $printer_info->characters_per_line;
-        //                     $login_session['printer_ip_address'] = $printer_info->printer_ip_address;
-        //                     $login_session['printer_port'] = $printer_info->printer_port;
-        //                     $login_session['qr_code_type'] = $printer_info->qr_code_type;
-        //                     $login_session['invoice_print'] = $printer_info->invoice_print;
-        //                     $login_session['fiscal_printer_status'] = $printer_info->fiscal_printer_status;
-        //                     $login_session['open_cash_drawer_when_printing_invoice'] = $printer_info->open_cash_drawer_when_printing_invoice;
-        //                     $login_session['print_server_url_invoice'] = $printer_info->print_server_url_invoice;
-        //                     $login_session['inv_qr_code_status'] = $printer_info->inv_qr_code_status;
-        //                 }
-        //             }
-        //         }
+                // Check register status
+                if ($register_status == '1') {
+                    $counter_id = $this->Common_model->getCounterIdFromRegister($user_information->id);
+                    if ($counter_id) {
+                        $printer_id = $this->Common_model->getPrinterIdByCounterId($counter_id);
+                        $printer_info = $this->Common_model->getPrinterInfoById($printer_id);
+                        if ($printer_info) {
+                            $login_session['print_format'] = $printer_info->print_format;
+                            $login_session['characters_per_line'] = $printer_info->characters_per_line;
+                            $login_session['printer_ip_address'] = $printer_info->printer_ip_address;
+                            $login_session['printer_port'] = $printer_info->printer_port;
+                            $login_session['qr_code_type'] = $printer_info->qr_code_type;
+                            $login_session['invoice_print'] = $printer_info->invoice_print;
+                            $login_session['fiscal_printer_status'] = $printer_info->fiscal_printer_status;
+                            $login_session['open_cash_drawer_when_printing_invoice'] = $printer_info->open_cash_drawer_when_printing_invoice;
+                            $login_session['print_server_url_invoice'] = $printer_info->print_server_url_invoice;
+                            $login_session['inv_qr_code_status'] = $printer_info->inv_qr_code_status;
+                        }
+                    }
+                }
 
 
-        //         $login_session['invoice_configuration'] = $company_info->invoice_configuration;
-        //         $login_session['inv_logo_is_show'] = $company_info->inv_logo_is_show;
-        //         $login_session['grocery_experience'] = $company_info->grocery_experience;
-        //         $login_session['generic_name_search_option'] = $company_info->generic_name_search_option;
-        //         $login_session['register_content'] = $company_info->register_content;
-        //         $login_session['printer_id'] = $user_information->printer_id ?? '';
-        //         $login_session['open_cash_drawer'] = $user_information->open_cash_drawer ?? '';
-        //         $login_session['user_id'] = $user_information->id;
-        //         $login_session['language'] = $user_information->language;
-        //         $login_session['sale_price_modify'] = $user_information->sale_price_modify;
-        //         $login_session['full_name'] = $user_information->full_name;
-        //         $login_session['email_address'] = $user_information->email_address;
-        //         $login_session['role'] = $user_information->role;
-        //         $login_session['photo'] = $user_information->photo;
-        //         $login_session['session_outlets'] = $user_information->outlet_id;
-        //         $login_session['company_id'] = $user_information->company_id;
-        //         $login_session['user_is_saas'] =$user_information->is_saas;
+                $login_session['invoice_configuration'] = $company_info->invoice_configuration;
+                $login_session['inv_logo_is_show'] = $company_info->inv_logo_is_show;
+                $login_session['grocery_experience'] = $company_info->grocery_experience;
+                $login_session['generic_name_search_option'] = $company_info->generic_name_search_option;
+                $login_session['register_content'] = $company_info->register_content;
+                $login_session['printer_id'] = $user_information->printer_id ?? '';
+                $login_session['open_cash_drawer'] = $user_information->open_cash_drawer ?? '';
+                $login_session['user_id'] = $user_information->id;
+                $login_session['language'] = $user_information->language;
+                $login_session['sale_price_modify'] = $user_information->sale_price_modify;
+                $login_session['full_name'] = $user_information->full_name;
+                $login_session['email_address'] = $user_information->email_address;
+                $login_session['role'] = $user_information->role;
+                $login_session['photo'] = $user_information->photo;
+                $login_session['session_outlets'] = $user_information->outlet_id;
+                $login_session['company_id'] = $user_information->company_id;
+                $login_session['user_is_saas'] =$user_information->is_saas;
 
-        //         //Company Information
-        //         $login_session['invoice_prefix'] = $company_info->invoice_prefix;
-        //         $login_session['business_name'] = $company_info->business_name;
-        //         $login_session['currency'] = $company_info->currency;
-        //         $login_session['currency_position'] = $company_info->currency_position;
-        //         $login_session['time_zone'] = $company_info->zone_name;
-        //         $login_session['date_format'] = $company_info->date_format;
-        //         $login_session['email'] =$company_info->email;
-        //         $login_session['precision'] =$company_info->precision;
-        //         $login_session['default_cursor_position'] =$company_info->default_cursor_position;
-        //         $login_session['product_display'] =$company_info->product_display;
-        //         $login_session['onscreen_keyboard_status'] =$company_info->onscreen_keyboard_status;
-        //         $login_session['inv_no_start_from'] =$company_info->inv_no_start_from;
-        //         $login_session['product_code_start_from'] =$company_info->product_code_start_from;
-        //         $login_session['default_customer'] =$company_info->default_customer;
-        //         $login_session['letter_head_gap'] =$company_info->letter_head_gap;
-        //         $login_session['letter_footer_gap'] =$company_info->letter_footer_gap;
+                //Company Information
+                $login_session['invoice_prefix'] = $company_info->invoice_prefix;
+                $login_session['business_name'] = $company_info->business_name;
+                $login_session['currency'] = $company_info->currency;
+                $login_session['currency_position'] = $company_info->currency_position;
+                $login_session['time_zone'] = $company_info->zone_name;
+                $login_session['date_format'] = $company_info->date_format;
+                $login_session['email'] =$company_info->email;
+                $login_session['precision'] =$company_info->precision;
+                $login_session['default_cursor_position'] =$company_info->default_cursor_position;
+                $login_session['product_display'] =$company_info->product_display;
+                $login_session['onscreen_keyboard_status'] =$company_info->onscreen_keyboard_status;
+                $login_session['inv_no_start_from'] =$company_info->inv_no_start_from;
+                $login_session['product_code_start_from'] =$company_info->product_code_start_from;
+                $login_session['default_customer'] =$company_info->default_customer;
+                $login_session['letter_head_gap'] =$company_info->letter_head_gap;
+                $login_session['letter_footer_gap'] =$company_info->letter_footer_gap;
 
-        //         $login_session['decimals_separator'] =$company_info->decimals_separator;
-        //         $login_session['thousands_separator'] =$company_info->thousands_separator;
-        //         $login_session['term_conditions'] =$company_info->term_conditions;
-        //         $login_session['default_payment'] =$company_info->default_payment;
-        //         $login_session['tax_is_gst'] = $company_info->tax_is_gst;
-        //         $login_session['collect_tax'] = $company_info->collect_tax;
-        //         $login_session['tax_type'] = $company_info->tax_type;
-        //         $login_session['tax_registration_no'] = $company_info->tax_registration_no;
-        //         $login_session['tax_title'] = $company_info->tax_title;
-        //         $login_session['invoice_footer'] = $company_info->invoice_footer;
-        //         $login_session['sms_setting_check'] = $company_info->sms_setting_check;
-        //         $login_session['invoice_logo'] = $company_info->invoice_logo;
-        //         $login_session['show_hide'] = $company_info->show_hide;
-        //         $login_session['i_sale'] = $company_info->i_sale;
-        //         $login_session['direct_cart'] = $company_info->direct_cart;
-        //         $login_session['purchase_price_show_hide'] = $company_info->purchase_price_show_hide;
-        //         $login_session['invoice_prefix'] = $company_info->invoice_prefix;
-        //         $login_session['whole_price_show_hide'] = $company_info->whole_price_show_hide;
-        //         $login_session['allow_less_sale'] = $company_info->allow_less_sale ?? '';
-        //         $login_session['item_modal_status'] = $company_info->item_modal_status;
-        //         $login_session['pos_total_payable_type'] = $company_info->pos_total_payable_type;
-        //         $login_session['is_loyalty_enable'] =$company_info->is_loyalty_enable;
-        //         $login_session['minimum_point_to_redeem'] =$company_info->minimum_point_to_redeem;
-        //         $login_session['loyalty_rate'] =$company_info->loyalty_rate;
-        //         $login_session['whatsapp_invoice_enable_status'] =$company_info->whatsapp_invoice_enable_status;
-        //         $login_session['company_is_saas'] = $company_info->is_saas;
-        //         $login_session['is_collapse'] = 'No';
-        //         $login_session['module_show_hide'] = $moduleArr;
-        //         // Login Time Update
-        //         $login_update = array();
-        //         $login_update['last_login'] = date('Y-m-d H:i:s');
-        //         $this->Common_model->updateInformation($login_update, $user_information->id, "tbl_users");
-        //         //Menu access information
+                $login_session['decimals_separator'] =$company_info->decimals_separator;
+                $login_session['thousands_separator'] =$company_info->thousands_separator;
+                $login_session['term_conditions'] =$company_info->term_conditions;
+                $login_session['default_payment'] =$company_info->default_payment;
+                $login_session['tax_is_gst'] = $company_info->tax_is_gst;
+                $login_session['collect_tax'] = $company_info->collect_tax;
+                $login_session['tax_type'] = $company_info->tax_type;
+                $login_session['tax_registration_no'] = $company_info->tax_registration_no;
+                $login_session['tax_title'] = $company_info->tax_title;
+                $login_session['invoice_footer'] = $company_info->invoice_footer;
+                $login_session['sms_setting_check'] = $company_info->sms_setting_check;
+                $login_session['invoice_logo'] = $company_info->invoice_logo;
+                $login_session['show_hide'] = $company_info->show_hide;
+                $login_session['i_sale'] = $company_info->i_sale;
+                $login_session['direct_cart'] = $company_info->direct_cart;
+                $login_session['purchase_price_show_hide'] = $company_info->purchase_price_show_hide;
+                $login_session['invoice_prefix'] = $company_info->invoice_prefix;
+                $login_session['whole_price_show_hide'] = $company_info->whole_price_show_hide;
+                $login_session['allow_less_sale'] = $company_info->allow_less_sale ?? '';
+                $login_session['item_modal_status'] = $company_info->item_modal_status;
+                $login_session['pos_total_payable_type'] = $company_info->pos_total_payable_type;
+                $login_session['is_loyalty_enable'] =$company_info->is_loyalty_enable;
+                $login_session['minimum_point_to_redeem'] =$company_info->minimum_point_to_redeem;
+                $login_session['loyalty_rate'] =$company_info->loyalty_rate;
+                $login_session['whatsapp_invoice_enable_status'] =$company_info->whatsapp_invoice_enable_status;
+                $login_session['company_is_saas'] = $company_info->is_saas;
+                $login_session['is_collapse'] = 'No';
+                $login_session['module_show_hide'] = $moduleArr;
+                // Login Time Update
+                $login_update = array();
+                $login_update['last_login'] = date('Y-m-d H:i:s');
+                $this->Common_model->updateInformation($login_update, $user_information->id, "tbl_users");
+                //Menu access information
 
-        //         $this->session->set_userdata($login_session);
-        //         if($user_information->outlet_id){
-        //             $outlet = explode(",", $user_information->outlet_id);
-        //             $outlet_details = $this->Common_model->getDataById($outlet[0], 'tbl_outlets');
-        //             if($outlet_details){
-        //                 $outlet_session = array();
-        //                 $outlet_session['outlet_name'] = $outlet_details->outlet_name;
-        //                 $outlet_session['address'] = $outlet_details->address;
-        //                 $outlet_session['phone'] = $outlet_details->phone;
-        //                 $this->session->set_userdata($outlet_session);
-        //             }
-        //         }
-        //         if ($user_information->role == '1') {
-        //             redirect("Outlet/outlets");
-        //         } else {
-        //             redirect("Authentication/userProfile");
-        //         }
-        //     }else {
-        //         $this->session->set_flashdata('exception_1', lang('incorrect_email_password_or_user_not_active'));
-        //         redirect('Authentication/index');
-        //     }
-        // } else {
-        //     $this->load->view('authentication/login');
-        // }
+                $this->session->set_userdata($login_session);
+                if($user_information->outlet_id){
+                    $outlet = explode(",", $user_information->outlet_id);
+                    $outlet_details = $this->Common_model->getDataById($outlet[0], 'tbl_outlets');
+                    if($outlet_details){
+                        $outlet_session = array();
+                        $outlet_session['outlet_name'] = $outlet_details->outlet_name;
+                        $outlet_session['address'] = $outlet_details->address;
+                        $outlet_session['phone'] = $outlet_details->phone;
+                        $this->session->set_userdata($outlet_session);
+                    }
+                }
+                if ($user_information->role == '1') {
+                    redirect("Outlet/outlets");
+                } else {
+                    redirect("Authentication/userProfile");
+                }
+            }else {
+                $this->session->set_flashdata('exception_1', lang('incorrect_email_password_or_user_not_active'));
+                redirect('Authentication/index');
+            }
+        } else {
+            $this->load->view('authentication/login');
+        }
     }
 
 

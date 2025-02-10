@@ -1,16 +1,17 @@
 <script src="<?php echo base_url(); ?>frequent_changing/js/add_outlet.js"></script>
 
 <section class="main-content-wrapper">
-<h3 class="display_none">&nbsp;</h3>
+    <h3 class="display_none">&nbsp;</h3>
 
     <?php
     if ($this->session->flashdata('exception')) {
         echo '<section class="alert-wrapper">
-        <div class="alert alert-success alert-dismissible fade show"> 
+        <div class="alert alert-success alert-dismissible fade show">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <div class="alert-body">
         <i class="m-right fa fa-check"></i>';
-        echo escape_output($this->session->flashdata('exception'));unset($_SESSION['exception']);
+        echo escape_output($this->session->flashdata('exception'));
+        unset($_SESSION['exception']);
         echo '</div></div></section>';
     }
     ?>
@@ -21,10 +22,10 @@
             <div class="col-6 p-0">
                 <h3 class="top-left-header mt-2"><?php echo lang('add_outlet'); ?></h3>
             </div>
-            <?php $this->view('updater/breadcrumb', ['firstSection'=> lang('outlet'), 'secondSection'=> lang('add_outlet')])?>
+            <?php $this->view('updater/breadcrumb', ['firstSection' => lang('outlet'), 'secondSection' => lang('add_outlet')]) ?>
         </div>
     </section>
-    
+
 
 
     <!-- Main content -->
@@ -38,26 +39,28 @@
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('outlet_code'); ?> <span class="required_star">*</span></label>
-                            <input  autocomplete="off" type="text" readonly name="outlet_code"
+                            <input autocomplete="off" type="text" readonly name="outlet_code" id="outlet_code"
                                 class="form-control" onfocus="select();"
                                 placeholder="<?php echo lang('outlet_code'); ?>"
                                 value="<?php echo escape_output($outlet_code) ?>">
                         </div>
                         <?php if (form_error('outlet_code')) { ?>
-                            <div class="callout callout-danger my-2">
-                                <?php echo form_error('outlet_code'); ?>
-                            </div>
+                        <div class="callout callout-danger my-2">
+                            <?php echo form_error('outlet_code'); ?>
+                        </div>
                         <?php } ?>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('outlet_name'); ?> <span class="required_star">*</span></label>
-                            <input  autocomplete="off" type="text" name="outlet_name" class="form-control" placeholder="<?php echo lang('outlet_name'); ?>" value="<?php echo set_value('outlet_name'); ?>">
+                            <input autocomplete="off" type="text" name="outlet_name" id="outlet_name"
+                                class="form-control" placeholder="<?php echo lang('outlet_name'); ?>"
+                                value="<?php echo set_value('outlet_name'); ?>">
                         </div>
                         <?php if (form_error('outlet_name')) { ?>
-                            <div class="callout callout-danger my-2">
-                                <span class="error_paragraph"><?php echo form_error('outlet_name'); ?></span>
-                            </div>
+                        <div class="callout callout-danger my-2">
+                            <span class="error_paragraph"><?php echo form_error('outlet_name'); ?></span>
+                        </div>
                         <?php } ?>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-3">
@@ -65,23 +68,25 @@
                             <label>
                                 <?php echo lang('phone'); ?> <span class="required_star">*</span>
                             </label>
-                            <input  autocomplete="off" type="text" name="phone" class="form-control" placeholder="<?php echo lang('phone'); ?>" value="<?php echo set_value('phone'); ?>">
+                            <input autocomplete="off" type="text" name="phone" class="form-control" id="phone"
+                                placeholder="<?php echo lang('phone'); ?>" value="<?php echo set_value('phone'); ?>">
                         </div>
                         <?php if (form_error('phone')) { ?>
-                            <div class="callout callout-danger my-2">
-                                <span class="error_paragraph"><?php echo form_error('phone'); ?></span>
-                            </div>
+                        <div class="callout callout-danger my-2">
+                            <span class="error_paragraph"><?php echo form_error('phone'); ?></span>
+                        </div>
                         <?php } ?>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('email'); ?></label>
-                            <input  autocomplete="off" type="text" name="email" class="form-control" placeholder="<?php echo lang('email'); ?>" value="<?php echo set_value('email'); ?>">
+                            <input autocomplete="off" type="email" name="email" id="email" class="form-control"
+                                placeholder="<?php echo lang('email'); ?>" value="<?php echo set_value('email'); ?>">
                         </div>
                         <?php if (form_error('email')) { ?>
-                            <div class="callout callout-danger my-2">
-                                <span class="error_paragraph"><?php echo form_error('email'); ?></span>
-                            </div>
+                        <div class="callout callout-danger my-2">
+                            <span class="error_paragraph"><?php echo form_error('email'); ?></span>
+                        </div>
                         <?php } ?>
                     </div>
                     <div class="col-md-6 col-lg-4 mb-3">
@@ -93,21 +98,22 @@
                             </select>
                         </div>
                         <?php if (form_error('active_status')) { ?>
-                            <div class="callout callout-danger my-2">
-                                <?php echo form_error('active_status'); ?>
-                            </div>
+                        <div class="callout callout-danger my-2">
+                            <?php echo form_error('active_status'); ?>
+                        </div>
                         <?php } ?>
                     </div>
                     <div class="clearfix"></div>
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('address'); ?> <span class="required_star">*</span></label>
-                            <textarea  autocomplete="off" name="address" class="form-control" placeholder="<?php echo lang('address'); ?>"><?php echo set_value('address'); ?></textarea>
+                            <textarea autocomplete="off" name="address" class="form-control" id="address"
+                                placeholder="<?php echo lang('address'); ?>"><?php echo set_value('address'); ?></textarea>
                         </div>
                         <?php if (form_error('address')) { ?>
-                            <div class="callout callout-danger my-2">
-                                <span class="error_paragraph"><?php echo form_error('address'); ?></span>
-                            </div>
+                        <div class="callout callout-danger my-2">
+                            <span class="error_paragraph"><?php echo form_error('address'); ?></span>
+                        </div>
                         <?php } ?>
 
                     </div>
