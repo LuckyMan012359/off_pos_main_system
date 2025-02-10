@@ -1,0 +1,22 @@
+.list-group-item {
+    display: flex;
+    align-items: center;
+}
+
+.highlight {
+    background: #f7e7d3;
+    min-height: 30px;
+    list-style-type: none;
+}
+.handle {
+    min-width: 26px;
+    background: #8b5cf6;
+    height: 26px;
+    display: inline-block;
+    cursor: move;
+    margin-right: 10px;
+    text-align: center;
+    color: white;
+    padding-top: 3px;
+    border-radius: 3px;
+}

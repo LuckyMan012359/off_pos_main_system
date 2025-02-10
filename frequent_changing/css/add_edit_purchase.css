@@ -1,0 +1,14 @@
+.table-box table {
+  margin-top: 0px !important;
+}
+
+.border-red {
+  border-color: red;
+}
+
+#payment_received_type tr td {
+  border-style: none;
+}
+.cursor-pointer{
+  cursor: pointer
+}

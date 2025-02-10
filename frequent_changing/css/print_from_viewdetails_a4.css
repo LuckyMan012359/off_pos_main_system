@@ -1,0 +1,17 @@
+@media print {
+    #wrapper {width: 100%; min-width: 250px;}
+    table tfoot { display: table-row-group; }
+    .table{
+        page-break-inside: auto;
+    }
+    .table tr{
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+    .print-btn{
+        display: none;
+    }
+    .main-footer{
+        display: none !important;
+    }
+}

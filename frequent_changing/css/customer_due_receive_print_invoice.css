@@ -1,0 +1,13 @@
+body { color: #000; }
+#wrapper {  max-width: 480px;; margin: 0 auto; padding-top: 20px; }
+.btn { border-radius: 0; margin-bottom: 5px; }
+.bootbox .modal-footer { border-top: 0; text-align: center; }
+h3 { margin: 5px 0; }
+.order_barcodes img { float: none !important; margin-top: 5px; }
+@media print {
+    .no-print { display: none; }
+    #wrapper { max-width: 480px; width: 100%; min-width: 250px; margin: 0 auto; }
+    .no-border { border: none !important; }
+    .border-bottom { border-bottom: 1px solid #ddd !important; }
+    table tfoot { display: table-row-group; }
+}

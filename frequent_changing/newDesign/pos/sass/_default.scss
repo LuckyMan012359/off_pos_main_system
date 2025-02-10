@@ -1,0 +1,273 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+$soft_white: #f8f7fe;
+$txt_color: #6d6d6d;
+$red: #FF503D;
+$blue: #2196f3;
+$purple: #9c27b0;
+$pink: #e91e63;
+$green: #8bc34a;
+$grey: #607d8b;
+$skyblue: #22bfe9;
+$khoyre: #d6b614;
+$green2: #31cf41;
+
+body,
+html {
+  font-family: "Nunito", sans-serif;
+}
+/*
+    ================================================================
+    Common Background Color
+*/
+.bg__red {
+  background-color: $red !important;
+  color: #fff !important;
+}
+.bg__blue {
+  background-color: $blue !important;
+  color: #fff !important;
+}
+.bg__purple {
+  background-color: $purple !important;
+  color: #fff !important;
+}
+.bg__pink {
+  background-color: $pink !important;
+  color: #fff !important;
+}
+.bg__green {
+  background-color: $green !important;
+  color: #fff !important;
+}
+.bg__grey {
+  background-color: $grey !important;
+  color: #fff !important;
+}
+.bg__khoyre {
+  background-color: $khoyre !important;
+  color: #fff !important;
+}
+.bg__green2 {
+  background-color: $green2 !important;
+  color: #fff !important;
+}
+/*
+  ================================
+  Sub menu List
+*/
+.has__children {
+  position: relative;
+  &.active {
+    .vertical {
+      display: block;
+    }
+    .horizontal {
+      display: flex;
+    }
+  }
+  .sub-menu {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    margin: 0;
+    display: none;
+    background-color: white !important;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border-radius: 5px !important;
+    z-index: 1;
+    &.vertical {
+      width: 170px;
+      &::before {
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: 10px;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        width: 15px;
+        height: 15px;
+        transform: rotate(45deg);
+        z-index: -1;
+      }
+      li {
+        width: 100%;
+        display: block;
+        background-color: white;
+        a {
+          padding: 10px !important;
+          display: block;
+          font-size: 14px !important;
+          &:hover {
+            background-color: $soft_white;
+          }
+        }
+      }
+    }
+    &.horizontal {
+      &::before {
+        content: "";
+        position: absolute;
+        top: -7px;
+        left: 10px;
+        background-color: white;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        width: 15px;
+        height: 15px;
+        transform: rotate(45deg);
+        z-index: -1;
+      }
+      li {
+        display: inline-block;
+        a {
+          padding: 10px 15px !important;
+          background-color: white;
+        }
+      }
+    }
+  }
+}
+.font_weight_lighter {
+  font-weight: lighter !important;
+}
+.full_width {
+  width: 100%;
+}
+.p10 {
+  padding: 10px;
+}
+.m-0 {
+  margin: 0 !important;
+}
+/*
+  ========
+  Select2 Design Change Menu
+*/
+.select2-dropdown {
+  border: 1px solid rgba($skyblue, 0.2) !important;
+  padding: 10px;
+  .select2-search--dropdown {
+    margin-bottom: 5px;
+    input {
+      padding: 7px;
+      border-radius: 5px;
+      border-color: rgba($skyblue, 0.2) !important;
+      outline: none;
+    }
+  }
+}
+.select2-container--default
+  .select2-results__option--highlighted[aria-selected] {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+  color: #333333 !important;
+  transition: all 0.3s;
+}
+.select2-results__option[aria-selected] {
+  color: #7d7d7d !important;
+}
+.select2-container--default .select2-results__option[aria-selected="true"] {
+  background-color: lighten($skyblue, 15) !important;
+  color: white !important;
+}
+/*
+  ===================================
+  End Select 2
+*/
+.datepicker-days {
+  background-color: white !important;
+}
+.required_star {
+  color: red;
+}
+@media (max-width: 600px) {
+  .has__children {
+    .sub-menu {
+      position: absolute;
+      top: 0;
+      margin: 0;
+      display: none;
+
+      &.vertical {
+        left: -182px;
+        width: 170px;
+        &::before {
+          content: "";
+          position: absolute;
+          top: 10px;
+          left: 160px;
+          background-color: white;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          width: 15px;
+          height: 15px;
+          transform: rotate(45deg);
+          z-index: -1;
+        }
+        li {
+          width: 100%;
+          display: block;
+          background-color: white;
+          a {
+            text-align: left;
+            padding: 10px !important;
+            display: block;
+            font-size: 14px !important;
+            &:hover {
+              background-color: $soft_white;
+            }
+          }
+        }
+      }
+      &.horizontal {
+        &::before {
+          content: "";
+          position: absolute;
+          top: -7px;
+          left: 10px;
+          background-color: white;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          width: 15px;
+          height: 15px;
+          transform: rotate(45deg);
+          z-index: -1;
+        }
+        li {
+          display: inline-block;
+          a {
+            padding: 10px 15px !important;
+            background-color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*
+  ========================
+  Customer Scrollbar js
+*/
+.scrollbar-macosx > .scroll-element .scroll-bar {
+  background-color: rgb(224, 224, 224) !important;
+}
+/*
+    ================================================
+    Default Scrollbar
+*/
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: $soft_white;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  border-radius: 20px;
+  background: rgb(224, 224, 224);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(189, 189, 189);
+}

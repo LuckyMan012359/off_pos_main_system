@@ -1,0 +1,22 @@
+.margin-bottom-2{
+  margin-bottom: 2px;
+}
+.bg-255{
+  color:rgba(255,0,0,0.51);
+}
+.margin_top_0{
+  margin-top: 0;
+}
+.pl-12px{
+  padding-left: 12px;
+}
+.w-95-p{
+  width: 95%;
+}
+.del-btn-c{
+  color:red;cursor:pointer;text-align: center;
+  font-size: 22px;
+}
+.inst-heading{
+  font-size: 1.5rem;
+}

@@ -1,0 +1,542 @@
+.table-box {
+  margin-top: 30px;
+  padding: 0 20px;
+  width: 100%;
+}
+
+.table-box table,
+.table-box table.dataTable,
+.table-box table.table {
+  background-color: white;
+  padding: 10px;
+  margin-top: 20px !important;
+  border-radius: 10px;
+  width: 100% !important;
+}
+
+.table-box table thead th,
+.table-box table.dataTable thead th,
+.table-box table.table thead th {
+  color: #333;
+}
+
+#datatable thead {
+  color: #333;
+}
+
+#datatable tbody tr:nth-child(even) {
+  background-color: rgba(204, 204, 204, 0.2);
+}
+
+.dataTables_wrapper {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.dataTables_wrapper .left-btn-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 200px;
+}
+
+.dataTables_wrapper .left-btn-box .deleteTableColumn {
+  width: 100px;
+  padding: 7px 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  margin-right: 10px;
+  opacity: 0.3;
+  -webkit-transition: opacity 0.3s;
+  transition: opacity 0.3s;
+}
+
+.dataTables_wrapper .left-btn-box .deleteTableColumn svg {
+  width: 18px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .left-btn-box .exportDropdown {
+  position: relative;
+  width: 100px;
+}
+
+.dataTables_wrapper .left-btn-box .exportDropdown .parent_btn {
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 7px 15px;
+}
+
+.dataTables_wrapper .left-btn-box .exportDropdown .parent_btn svg {
+  width: 18px;
+  height: auto;
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .left-btn-box .exportDropdown .dt-buttons {
+  position: absolute;
+  top: 40px;
+  left: 0;
+  width: 140px;
+  background-color: white;
+  padding: 0;
+  border: 1px solid #ddd;
+  z-index: 1;
+  display: none;
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.dataTables_wrapper .left-btn-box .exportDropdown .dt-buttons button {
+  display: block;
+  width: 100%;
+  background-image: none;
+  background-color: white;
+  border: none;
+  color: #333;
+  padding: 7px 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.dataTables_wrapper .left-btn-box .exportDropdown .dt-buttons button:hover {
+  background-color: #66c8e0;
+  color: white;
+}
+
+.dataTables_wrapper .right-btn-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.dataTables_wrapper .right-btn-box .btn-box {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.dataTables_wrapper .right-btn-box .btn-box a {
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .right-btn-box .btn-box a:last-child {
+  margin-right: 0;
+}
+
+.dataTables_wrapper .right-btn-box .btn {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  padding: 7px 15px;
+}
+
+.dataTables_wrapper .right-btn-box .dataFilterBy {
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .right-btn-box .dataFilterBy svg {
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .right-btn-box #datatable_filter {
+  margin-right: 10px;
+}
+
+.dataTables_wrapper .right-btn-box #datatable_filter label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  border: 1px solid #f0f0f0;
+  background-color: white;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.04);
+  height: 35px;
+  margin-bottom: 0;
+  border-radius: 5px;
+  width: 250px;
+  padding-left: 10px;
+}
+
+.dataTables_wrapper .right-btn-box #datatable_filter label svg {
+  stroke: #8b8b8b;
+}
+
+.dataTables_wrapper .right-btn-box #datatable_filter label input {
+  border: none;
+  outline: none;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  width: 100%;
+  padding: 0;
+}
+
+.dataTables_wrapper
+  .right-btn-box
+  #datatable_filter
+  label
+  ::-webkit-input-placeholder {
+  font-size: 14px;
+}
+
+.dataTables_wrapper
+  .right-btn-box
+  #datatable_filter
+  label
+  :-ms-input-placeholder {
+  font-size: 14px;
+}
+
+.dataTables_wrapper
+  .right-btn-box
+  #datatable_filter
+  label
+  ::-ms-input-placeholder {
+  font-size: 13px;
+}
+
+.dataTables_wrapper .right-btn-box #datatable_filter label ::placeholder {
+  font-size: 13px;
+}
+
+.dataTables_wrapper .dataTables_paginate.paging_simple_numbers {
+  padding-right: 20px;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button {
+  background-color: rgba(102, 199, 224, 0.2);
+  cursor: pointer;
+  display: inline-block;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.active
+  a {
+  background-color: #66c8e0;
+  color: white;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button:nth-child(2) {
+  border-top-left-radius: 5rem;
+  border-bottom-left-radius: 5rem;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button:nth-last-child(2) {
+  border-top-right-radius: 5rem;
+  border-bottom-right-radius: 5rem;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button
+  a {
+  background-color: transparent;
+  display: inline-block;
+  border-radius: 50%;
+  border: none;
+  color: #333;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.previous,
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.next {
+  border-radius: 50%;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.previous
+  a,
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.next
+  a {
+  border-color: transparent;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.previous.disabled,
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.next.disabled {
+  cursor: none;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.previous.disabled
+  a,
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.next.disabled
+  a {
+  color: #acacac;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.previous {
+  margin-right: 10px;
+}
+
+.dataTables_wrapper
+  .dataTables_paginate.paging_simple_numbers
+  .pagination
+  .paginate_button.next {
+  margin-left: 10px;
+}
+
+table.dataTable.no-footer {
+  border-color: transparent !important;
+}
+
+.dt-button-collection {
+  margin-top: 0 !important;
+  font-weight: bold !important;
+}
+
+.dt-button-collection .buttons-columnVisibility {
+  background-color: rgba(102, 199, 224, 0.3) !important;
+}
+
+.dt-button-collection .buttons-columnVisibility:hover {
+  color: #333 !important;
+}
+
+.dt-button-collection .buttons-columnVisibility.active {
+  background-color: white !important;
+}
+
+
+.filter-overlay {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 1031;
+  display: none;
+}
+
+.filter-modal {
+  position: absolute;
+  top: 0%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  transform: translateX(-50%);
+  background-color: white;
+  -webkit-box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  width: 98%;
+  max-width: 700px;
+  padding: 20px;
+  border-radius: 5px;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 1032;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.filter-modal.active {
+  top: 10%;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.filter-modal .filter-modal-body header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.filter-modal .filter-modal-body header .close-filter-modal {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  background-color: transparent;
+  color: #ff3a3a;
+  font-size: 22px;
+  border: none;
+  outline: none;
+}
+
+.filter-modal .filter-modal-body .filter-modal-title mx-2 {
+  margin: 0 0 10px 0;
+}
+
+.filter-modal .filter-modal-body form,
+.filter-modal .filter-modal-body .form-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-box-pack: start;
+  -ms-flex-pack: start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.filter-modal .filter-modal-body .filter-dropdown {
+  width: 175px;
+}
+
+.filter-modal .filter-modal-body .filter-dropdown:last-child {
+  width: 100px;
+}
+
+.filter-modal .filter-modal-body select {
+  width: 100%;
+}
+
+.filter-modal .filter-modal-body .select2-container,
+.filter-modal .filter-modal-body input {
+  width: 100% !important;
+}
+
+/********Others And Single Style********/
+.font-17 {
+  font-size: 17px;
+  padding-left: 7px;
+}
+
+.actionDropDownBtn button {
+  background-color: transparent;
+  border: none;
+  outline: none;
+  color: #333;
+  font-size: 20px;
+}
+
+.actionDropDownBtn button:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.actionDropDownBtn .dropdown-menu {
+  -webkit-box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+  margin: 0;
+  padding: 0;
+}
+
+.actionDropDownBtn .dropdown-menu li a {
+  padding: 10px 20px;
+  display: block;
+}
+
+.actionDropDownBtn .dropdown-menu li a i {
+  color: #6b6b6b;
+}
+
+.btn-group.open .dropdown-toggle {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
+
+.dt-button-background {
+  display: none !important;
+}
+
+.w-150 {
+  width: 150px;
+}
+
+.txt-right {
+  text-align: right;
+}
+
+.JustifyRight {
+  -webkit-box-pack: end;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.not-export-col {
+  pointer-events: none;
+}
+
+.pl-10 {
+  padding-left: 18px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+
+.width-100 {
+  width: 100%;
+}
+
+.text-left {
+  text-align: left !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+#DataTables_Table_0_wrapper form {
+  width: 100%;
+}

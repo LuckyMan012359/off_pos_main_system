@@ -1,0 +1,42 @@
+#wrapper {
+    max-width: 790px;
+    margin: 0 auto;
+}
+.shop-name, .invoice-heading{
+    font-size: 22px;
+    font-weight: 900;
+}
+.bill-to, .common-heading{
+    font-size: 18px;
+    font-weight: 900;
+}
+@page {
+    size: A4;
+    margin: 0;
+}
+@media print {
+    @page {
+        size: A4;
+        margin: 0;
+    }
+    #wrapper {
+        width: 793.92px;
+    }
+    table tfoot { display: table-row-group; }
+    .table{
+        page-break-inside: auto;
+    }
+    .table tr{
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+    .print-btn{
+        display: none;
+    }
+    .main-footer{
+        display: none !important;
+    }
+    .justify-content-between{
+        justify-content: space-between !important;
+    }
+}

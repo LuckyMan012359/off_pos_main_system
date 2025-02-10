@@ -1,0 +1,66 @@
+.dropdown-toggle::after {
+    display: none;
+    content: none;
+}
+
+.printer_table_trigger .btn-group button:hover {
+    background-color: #f4f3f4;
+    box-shadow: none;
+}
+
+.printer_table_trigger .btn-group button {
+    color: #6e6b7b;
+    padding: 0 5px 0 5px;
+    background-color: transparent;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+}
+
+.printer_table_trigger .dropdown-menu-right{
+    position: absolute;
+    inset: 0px auto auto -95px;
+    margin: 0px;
+    transform: translate(0px, 40px);
+}
+
+.printer_table_trigger thead tr th{
+    color: rgba(47, 43, 61, 0.7803921569) !important;
+}
+
+
+.printer_table_trigger thead tr, .printer_table_trigger thead tr th{
+    border-top: 1px solid #ddd;
+    border-bottom: 1px solid #ddd !important;
+}
+
+.printer_table_trigger thead tr th{
+    border-bottom: 1px solid #ddd !important;
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: rgba(47, 43, 61, 0.7803921569);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    white-space: nowrap;  
+}
+.printer_table_trigger tbody tr td{
+    border-bottom: 1px solid #ddd !important;
+    position: relative;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    color: rgba(47, 43, 61, 0.7803921569);
+    font-weight: 500;
+    font-size: 13px;
+    text-transform: uppercase;
+    white-space: nowrap;  
+}
+
+.modal_body_scroll{
+    overflow-y: auto;
+    max-height: 400px;
+}
+.modal_message{
+    padding: 10px 10px;
+}

@@ -1,0 +1,176 @@
+body{
+    font-family: "Montserrat", Helvetica, Arial sans-serif !important;
+}
+h1,h2,h3,h4,h5,h6, p, div, span{
+    font-family: "Montserrat", Helvetica, Arial sans-serif !important;
+}
+
+.customer-display {
+    max-width: 660px;
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.customer-display h2{
+    text-align: center;
+}
+.customer_display_header, .customer_display_body .single-item{
+    display: grid;
+    grid-template-columns: 35% 15% 17% 15% 18%;
+}
+.customer_display_footer .footer-calculate{
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 5%;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.total-payable{
+    text-align: center;
+}
+.c-text-center{
+    text-align: center;
+}
+
+.item-note{
+    font-size: 12px;
+    font-style: italic;
+}
+.c-text-right{
+    text-align: right;
+}
+.customer_display_header{
+    padding: 10px 10px;
+    font-size: 15px;
+    font-weight: 700;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+.customer_display_header .customer-item{
+    border-bottom: 2px solid #f4f4f4;
+    padding-bottom: 10px;
+}
+.single-item-wrap{
+    padding-top: 10px;
+}
+.item-note{
+    margin-top: 7px;
+}
+.customer-display h2{
+    font-size: 30px;
+    font-weight: 700;
+    margin-top: 0px;
+    margin-bottom: 10px;
+}
+
+.total-payable h2{
+    background-color: rgba(34, 191, 233, 0.2);
+    text-align: center;
+    padding: 10px 5px;
+    color: #0085a9;
+    font-weight: bold;
+    border-radius: 7px;
+}
+.customer_display_body{
+    height: calc(98vh - 235px);
+    padding-left: 10px;
+    padding-right: 10px;
+    overflow-y: auto;
+}
+.footer-header{
+    font-size: 17px;
+    font-weight: 700;
+}
+.customer_display_wrap{
+    overflow: hidden;
+}
+
+
+
+
+/*  Mobile : 576px.
+    Gutters: 24px.
+    Outer margins: 28px.
+    Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+@media only screen and (min-width: 576px) and (max-width: 767.98px) {
+    .customer-display {
+        max-width: 95%;
+    }
+}
+
+
+/*  Mobile Small Device: 450px.
+    Gutters: 24px.
+    Outer margins: 28px.
+    Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+@media only screen and (min-width: 450px) and (max-width: 575.98px) {
+    .customer-display {
+        max-width: 97%;
+    }
+    .customer-display h2 {
+        font-size: 20px;
+    }
+    .customer_display_inner_wrapper{
+        overflow-x: auto;
+        margin-right: 10px;
+    }
+    .customer_display_header, .customer_display_body .single-item {
+        grid-template-columns: 200px 90px 90px 90px 150px;
+        grid-gap: 0px;
+    }
+    .customer_display_header, .customer_display_body .single-item{
+        grid-template-columns: 200px 90px 90px 90px 150px;
+        grid-gap: 0px;
+    }
+    .customer_display_footer .footer-calculate {
+        grid-template-columns: 49% 49%;
+        grid-gap: 2%;
+    }
+    .footer-header {
+        font-size: 15px;
+    }
+}
+/*  Mobile Small Device: 350px.
+    Gutters: 24px.
+    Outer margins: 28px.
+    Inherits styles from: Default Layout.
+-----------------------------------------------------------------
+cols    1     2      3      4      5      6      7      8
+px      68    160    252    344    436    528    620    712    */
+@media only screen and (min-width: 350px) and (max-width: 449.98px) {
+    .customer-display {
+        max-width: 97%;
+    }
+    .customer-display h2 {
+        font-size: 20px;
+    }
+    .customer_display_inner_wrapper{
+        overflow-x: auto;
+        margin-right: 10px;
+    }
+    .customer_display_header, .customer_display_body .single-item {
+        grid-template-columns: 200px 90px 90px 90px 150px;
+        grid-gap: 0px;
+    }
+    .customer_display_header, .customer_display_body .single-item{
+        grid-template-columns: 200px 90px 90px 90px 150px;
+        grid-gap: 0px;
+    }
+    .customer_display_footer .footer-calculate {
+        grid-template-columns: 49% 49%;
+        grid-gap: 2%;
+    }
+    .footer-header {
+        font-size: 15px;
+    }
+}
+
+

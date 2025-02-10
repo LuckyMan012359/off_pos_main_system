@@ -1,0 +1,43 @@
+.top-left-header{
+  margin-top: 0px !important;
+}
+h1,h2,h3,h4,p{
+  margin:3px 0px;
+  text-align: center;
+}
+.tbl  {
+  border-collapse:collapse;
+  border-spacing:0;
+  width: 100%;
+}
+.tbl tr td{
+  padding:5px;
+  padding:14px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  border-style:solid;
+  border-width:1px;
+  word-break:break-all;
+}
+.tbl tr th{
+  padding:5px;
+  padding:14px;
+  font-family:Arial, sans-serif;
+  font-size:15px;
+  border-style:solid;
+  border-width:1px;
+  word-break:break-all;
+}
+.title{
+  font-weight: bold;
+}
+.box-primary{
+  border-top-color: white !important;
+  margin-top: 5px;
+}
+
+.print_label_btn{
+  background-color: rgb(12, 88, 137);
+  padding: 5px;font-size: 21px;
+  float:right;color: white;
+}

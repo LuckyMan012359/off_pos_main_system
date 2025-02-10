@@ -1,0 +1,80 @@
+.pos__modal .pos__modal__body .none_inner_body.separate {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.pos__modal .pos__modal__body .none_inner_body.separate .cart__item__modal {
+  width: calc(100% - 110px);
+}
+
+.pos__modal .pos__modal__body .none_inner_body.separate .btn_list_wrapper {
+  width: 100px;
+}
+
+.pos__modal
+  .pos__modal__body
+  .none_inner_body.separate
+  .btn_list_wrapper
+  .btn__list {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 220px;
+}
+
+.pos__modal
+  .pos__modal__body
+  .none_inner_body.separate
+  .btn_list_wrapper
+  .btn__list
+  li {
+  margin-bottom: 5px;
+}
+
+.pos__modal
+  .pos__modal__body
+  .none_inner_body.separate
+  .btn_list_wrapper
+  .btn__list
+  button {
+  background-color: #8b5cf6;
+  color: white;
+  width: 100%;
+  border: none;
+  outline: none;
+  padding: 3px 0;
+  border-radius: 5px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+}
+
+.pos__modal
+  .pos__modal__body
+  .none_inner_body.separate
+  .btn_list_wrapper
+  .btn__list
+  button:hover {
+  background-color: #16b2dc;
+}
+
+.pos__modal .default__modal__footer.separator {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.pos__modal .default__modal__footer .modal_clear_btn {
+  width: 100px;
+  background-color: #FF503D;
+}
+
+.pos__modal .default__modal__footer .modal_clear_btn:hover {
+  background-color: #b41515;
+}

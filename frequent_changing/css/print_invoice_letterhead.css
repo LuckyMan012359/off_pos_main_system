@@ -1,0 +1,180 @@
+  .page-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgb(236, 236, 236); /* for demo */
+  }
+  .page-footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background: rgb(236, 236, 236); /* for demo */
+  }
+  .page {
+    page-break-after: always;
+  }
+
+  #wrapper {
+    max-width: 793.92px;
+    margin: 0 auto;
+  }
+  .btn {
+    border-radius: 0;
+    margin-bottom: 5px;
+  }
+  .bootbox .modal-footer {
+    border-top: 0;
+    text-align: center;
+  }
+  .shop-name, .invoice-heading{
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .bill-to, .common-heading{
+    font-size: 10px;
+    font-weight: 900;
+  }
+  h4 {
+    margin: 5px 0;
+  }
+  .order_barcodes img {
+    float: none !important;
+    margin-top: 5px;
+  }
+  p {
+    font-size: 10px;
+  }
+  
+  table thead tr th{
+    font-size: 11px !important;
+    padding-top: 5px!important;
+    padding-bottom: 5px!important;
+    text-align: left;
+  }
+  table tfoot tr th{
+    font-size: 11px !important;
+    padding: 4px 0px !important;
+  }
+  table tbody tr td{
+    font-size: 11px !important;
+    padding: 3px 3px !important;
+  }
+  .short_note {
+    font-size: 8px !important;
+  }
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+
+    thead {display: table-header-group;} 
+    tfoot {display: table-footer-group;}
+    button {display: none;}
+    body {margin: 0;}
+
+    @page {
+      size: A4;
+      margin: 0;
+    }
+    .no-print {
+      display: none;
+    }
+    #wrapper {
+      max-width: 793.92px;
+      margin: 0 auto;
+    }
+    .no-border {
+      border: none !important;
+    }
+    .border-bottom {
+      border-bottom: 1px solid #ddd !important;
+    }
+    table tfoot {
+      display: table-row-group;
+    }
+    tr.noBorder td {
+      border: 0 !important;
+    }
+    .tablePage {
+      page-break-inside: auto;
+    }
+    img {
+      -webkit-print-color-adjust: exact;
+    }
+  
+    table thead tr th, table tbody tr td, table tfoot tr th{
+      border-right: 0;
+      border-right: none;
+    }
+  
+  }
+
+  
+  /* for header print*/
+  footer {
+    width: 100%;
+    text-align: center;
+  }
+  
+  @media print {
+    .inv_black {
+      -webkit-print-color-adjust: exact;
+      background-color: #000 !important;
+      color: #fff !important;
+      font-weight: bold;
+      color: #fff;
+      font-size: 22px;
+      display: table;
+      text-align: center;
+      margin: 0 auto;
+      padding: 3px 8px;
+      margin-top: 10px;
+      border-radius: 3px;
+    }
+    .margin-bottom-10 {
+      margin-bottom: 10px;
+    }
+    footer {
+      position: fixed;
+      bottom: 0;
+    }
+    .content-block,p {
+      page-break-inside: avoid;
+    }
+  }
+  /* for footer print*/
+  
+  .inv_black {
+    -webkit-print-color-adjust: exact;
+    background-color: #000;
+    font-weight: bold;
+    color: #fff;
+    font-size: 22px;
+    display: table;
+    text-align: center;
+    margin: 0 auto;
+    padding: 3px 8px;
+    margin-top: 10px;
+    border-radius: 3px;
+  }
+  
+  tr.noBorder td {
+    border: 0 !important;
+  }
+  .tablePage {
+    page-break-inside: auto;
+  }
+  .logo_header {
+    overflow: hidden;
+    display: inline-block;
+    width: 100%;
+  }
+  .op_width_60_p {
+    width: 60%;
+  }
+  .op_float_left {
+    float: left;
+  }
+  

@@ -1,0 +1,22 @@
+.font-700{
+  font-weight: 700;
+}
+
+#printableArea table{
+  width : 300px !important;
+}
+#printableArea .table-box table.dataTable tbody tr:nth-child(odd), .table-box table tbody tr:nth-child(odd) {
+  background-color: white;
+}
+
+@media print {
+  .font-700{
+    font-weight: 700;
+  }
+  #printableArea table{
+    width : 300px !important;
+  }
+  #printableArea .table-box table.dataTable tbody tr:nth-child(odd), .table-box table tbody tr:nth-child(odd) {
+    background-color: white;
+  }
+}

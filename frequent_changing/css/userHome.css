@@ -1,0 +1,100 @@
+.company_info{
+  min-height: 41px;
+  color: white !important;
+  text-align: center;
+  font-weight: bold;
+}
+.breadcrumb{
+  padding: 0px 5px !important;
+}
+.btn-primary{
+  background-color: #3c8dbc;
+}
+.form_question{
+  font-size: 24px;
+  color: #3c8dbc;
+  padding-top: 7px;
+}
+
+.left-sdide{
+  float: left !important;
+}
+
+.navbar-nav > .user-menu > .dropdown-menu dropdown-menu-right{
+  width: 50px;
+}
+.loader{
+  display: none;
+}
+@media only screen and (max-device-width: 767px){
+  .width_notification{
+      width: 94% !important;
+  }
+}
+#myModal .modal-title{text-align: left;}
+#register_details_body p{ text-align:left; margin:0px 0px 10px 0px;}
+input[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: inner-spin-button !important;
+}
+.profit_txt {
+  font-weight: bold !important;
+  color: #8b5cf6 !important;
+  background-color: rgba(139, 92, 246, 0.1);
+}
+.new-btn {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  color: #8b5cf6;
+  background-color: rgba(139, 92, 246, 0.1);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+.new-btn-danger {
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 8px 10px;
+  color: #f51111;
+  background-color: rgb(243 48 48 / 10%);
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+  height: 40px;
+}
+.new-btn-danger:hover {
+  color: #dd0a0a;
+  background-color: rgba(161, 6, 6, 0.1);
+}
+
+.header-outlet-name{
+  border-right: 1px solid;
+  border-left: 1px solid;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-weight: 600;
+  color: 307e;
+  color: #8b5cf6;
+  letter-spacing: 1px;
+}
+
+.header-outlet-name small{
+  display: block;
+  text-align: right;
+  font-size: 10px;
+}
+

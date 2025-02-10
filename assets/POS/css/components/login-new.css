@@ -1,0 +1,95 @@
+body{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+}
+.card-wrapper{
+  width: 400px;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 26px 55px -15px rgb(23 111 148 / 45%);
+}
+.logo{
+  margin-bottom: 15px;
+}
+.wrapper-content {
+  margin: 0 auto;
+  font-family: "Inter", sans-serif;
+  margin-bottom: 30px;
+}
+.did-floating-label-content {
+  position: relative;
+}
+.did-floating-label {
+  color: #36405e;
+  font-size: 15px;
+  font-weight: normal;
+  position: absolute;
+  pointer-events: none;
+  left: 15px;
+  top: 11px;
+  padding: 0 5px;
+  background: #fff;
+  transition: 0.2s ease all;
+  -moz-transition: 0.2s ease all;
+  -webkit-transition: 0.2s ease all;
+}
+.did-floating-input{
+  font-size: 15px !important;
+  display: block;
+  width: 100%;
+  height: 45px;
+  padding: 0 20px;
+  background: #fff;
+  color: #36405e;
+  border: 2px solid #36405e;
+  border-radius: 4px;
+  box-sizing: border-box;
+}	
+.did-floating-input:focus{
+  outline: none;
+}
+.did-floating-label{
+  top: -12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.did-floating-input:not(:placeholder-shown) ~ .did-floating-label {
+  top: -12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.master-title {
+  font-size: 24px;
+  font-weight: 800;
+  display: block;
+  margin-bottom: 30px;
+  text-align: center;
+  color: #36405e;
+}
+::placeholder{
+  font-size: 13px;
+  color: #ccc;
+  font-weight: 500;
+}
+
+.submit-btn{
+  border: 2px solid #36405e;
+  color: #36405e;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding: 5px 22px;
+  font-size: 14px;
+}
+.submit-btn:hover{
+  background-color: #36405e;
+  box-shadow: 0 8px 25px -8px #36405e !important;
+  transition: 0.3s;
+  color: white;
+}
+.btn-check:focus+.btn, .btn:focus {
+  outline: 0;
+  box-shadow: 0 8px 25px -8px #36405e !important;
+}

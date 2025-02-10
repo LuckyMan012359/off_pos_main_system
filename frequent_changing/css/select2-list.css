@@ -1,0 +1,9 @@
+.select2-container--default .select2-results__option--highlighted[aria-selected] {
+    background-color: rgba(139, 92, 246, 0.1) !important;
+    color: #143157 !important;
+}
+
+.select2-container--default .select2-results__option[aria-selected=true] {
+    background-color: rgba(139, 92, 246, 0.2) !important; 
+    color: #143157 !important;
+}

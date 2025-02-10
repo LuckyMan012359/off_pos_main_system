@@ -1,0 +1,123 @@
+.container {
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  font-size: 14px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+  background-color: #8b5cf6;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 10px;
+  top: 5px;
+  width: 6px;
+  height: 13px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+
+
+
+#will_login_section .checkmark {
+  width: 1.15em;
+  height: 1.15em;
+  margin-top: .25em;
+  background-color: #ffffff;
+  vertical-align: top;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: 1px solid rgba(0,0,0,.25);
+  border-radius: 0.25em;
+}
+#will_login_section .container .checkmark:after {
+  left: 4px;
+  top: 1px;
+  width: 6px;
+  height: 9px;
+  border-width: 0px 2px 2px 0px;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(43deg);
+}
+
+#will_login_section .container {
+  position: relative;
+  padding-left: 25px;
+  cursor: pointer;
+  font-size: 0.857rem;
+  color: black;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+#will_login_section .container input:checked ~ .checkmark {
+  background-color: #8b5cf6;
+}
+#will_login_section .header-element {
+  border-bottom: 1px solid #80808030;
+}
+#will_login_section .header-element b {
+  display: block;
+  margin-bottom: 5px;
+}
+
+
+.access-card{
+  border-radius: 5px;
+  padding: 15px;
+  background-color: rgba(139, 92, 246, 0.1);
+  margin-bottom: 15px;
+}
+.access-card:hover{
+  box-shadow: 0 25px 18px -14px rgb(139 92 246 / 22%);
+}
+

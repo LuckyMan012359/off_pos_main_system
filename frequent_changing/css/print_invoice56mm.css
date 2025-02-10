@@ -1,0 +1,20 @@
+#wrapper { max-width: 480px;}
+.short_note {
+    font-size: 10px !important;
+    font-style: italic;
+}
+@media print {
+    
+    #wrapper { max-width: 480px;}
+    table tfoot { display: table-row-group; }
+    .table{
+        page-break-inside: auto;
+    }
+    .table tr{
+        page-break-inside: avoid;
+        page-break-after: auto
+    }
+    .print-btn{
+        display: none;
+    }
+}

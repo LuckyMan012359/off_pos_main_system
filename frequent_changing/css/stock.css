@@ -1,0 +1,25 @@
+
+.body_area{
+    padding:1px;
+}
+.tbl  {
+    border-collapse:collapse;
+    border-spacing:0;
+    width: 100%;
+
+}
+.tbl tr td{
+    padding:14px;
+    font-family:Arial, sans-serif;
+    font-size:15px;
+    border-style:solid;
+    border-width:1px;
+    word-break:break-all;
+}
+
+.title{
+    font-weight: bold;
+}
+.top-left-header{
+    margin-top: 0px !important;
+}

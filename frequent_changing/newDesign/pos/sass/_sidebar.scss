@@ -1,0 +1,136 @@
+.main__sidebar {
+  background-color: white;
+  width: 250px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  transition: all 0.3s;
+  transform: translateX(-120%);
+  &.active {
+    transform: translateX(0);
+  }
+  .sidebar__menu {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    padding: 10px;
+
+    height: calc(100% - 10px);
+    li {
+      a {
+        position: relative;
+        display: flex;
+        align-items: center;
+        color: #555555;
+        padding: 10px;
+        font-size: 14px;
+        font-weight: 500;
+        text-decoration: none;
+        text-transform: capitalize;
+        transition: all 0.3s;
+        &:hover {
+          color: #222222;
+        }
+        svg {
+          width: 20px;
+          height: auto;
+        }
+        span:not(.pull-right-container) {
+          margin-left: 10px;
+        }
+        .pull-right-container {
+          position: absolute;
+          right: 10px;
+          top: 16px;
+          font-size: 10px;
+          transition: all 0.3s;
+          &.active {
+            transform: rotate(-90deg);
+          }
+        }
+      }
+      .sub__menu {
+        list-style-type: none;
+        margin: 0;
+        padding: 0 0 0 35px;
+        display: none;
+        a {
+          i {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* All Icon Color */
+.sidebar__menu > li:nth-child(1) > a > svg {
+  stroke: #1abc9c;
+}
+.sidebar__menu > li:nth-child(2) > a > svg {
+  stroke: #3498db;
+}
+.sidebar__menu > li:nth-child(3) > a > svg {
+  stroke: #9b59b6;
+}
+.sidebar__menu > li:nth-child(4) > a > svg {
+  stroke: #2ecc71;
+}
+.sidebar__menu > li:nth-child(5) > a > svg {
+  stroke: #f1c40f;
+}
+.sidebar__menu > li:nth-child(6) > a > svg {
+  stroke: #e67e22;
+}
+.sidebar__menu > li:nth-child(7) > a > svg {
+  stroke: hotpink;
+}
+.sidebar__menu > li:nth-child(8) > a > svg {
+  stroke: purple;
+}
+.sidebar__menu > li:nth-child(9) > a > svg {
+  stroke: steelblue;
+}
+.sidebar__menu > li:nth-child(10) > a > svg {
+  stroke: gold;
+}
+.sidebar__menu > li:nth-child(11) > a > svg {
+  stroke: cornflowerblue;
+}
+.sidebar__menu > li:nth-child(12) > a > svg {
+  stroke: crimson;
+}
+.sidebar__menu > li:nth-child(13) > a > svg {
+  stroke: rgb(14, 42, 168);
+}
+.sidebar__menu > li:nth-child(14) > a > svg {
+  stroke: #1ae25d;
+}
+.sidebar__menu > li:nth-child(15) > a > svg {
+  stroke: orangered;
+}
+.sidebar__menu > li:nth-child(16) > a > svg {
+  stroke: cornflowerblue;
+}
+.sidebar__menu > li:nth-child(17) > a > svg {
+  stroke: navy;
+}
+.sidebar__menu > li:nth-child(18) > a > svg {
+  stroke: #1abc9c;
+}
+.sidebar__menu > li:nth-child(19) > a > svg {
+  stroke: #3498db;
+}
+.sidebar__menu > li:nth-child(20) > a > svg {
+  stroke: #9b59b6;
+}
+.sidebar__menu > li:nth-child(21) > a > svg {
+  stroke: #2ecc71;
+}
+.sidebar__menu > li:nth-child(22) > a > svg {
+  stroke: #f1c40f;
+}

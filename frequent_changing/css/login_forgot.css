@@ -1,0 +1,17 @@
+.content-wrapper{
+    margin-left: 0px !important;
+    min-height: 90% !important;
+}
+.main-footer{
+    margin-left: 0px !important; 
+    text-align: center;
+}
+.box{
+    width: 75%;
+    margin-left: 15%;
+    text-align: center;
+}
+
+.alert p{
+    margin: 0;
+}
