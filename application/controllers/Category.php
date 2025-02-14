@@ -14,9 +14,10 @@
     # This is Category Controller
     ###########################################################
  */
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Category extends Cl_Controller {
+class Category extends Cl_Controller
+{
 
 
     /**
@@ -24,7 +25,8 @@ class Category extends Cl_Controller {
      * @access public
      * @return void
      */
-    public function __construct() {
+    public function __construct()
+    {
         parent::__construct();
         $this->load->model('Authentication_model');
         $this->load->model('Common_model');
@@ -38,27 +40,27 @@ class Category extends Cl_Controller {
         $segment_3 = $this->uri->segment(3);
         $controller = "";
         $function = "";
-        if($segment_2=="addEditItemCategory"){
+        if ($segment_2 == "addEditItemCategory") {
             $controller = "60";
             $function = "add";
-        }elseif($segment_2=="addEditItemCategory" && $segment_3){
+        } elseif ($segment_2 == "addEditItemCategory" && $segment_3) {
             $controller = "60";
             $function = "edit";
-        }elseif($segment_2=="deleteItemCategory"){
+        } elseif ($segment_2 == "deleteItemCategory") {
             $controller = "60";
             $function = "delete";
-        }elseif($segment_2=="itemCategories"){
+        } elseif ($segment_2 == "itemCategories") {
             $controller = "60";
             $function = "list";
-        }elseif($segment_2 == "sortCategory" || $segment_2 == "sortCategoryUpdate"){
+        } elseif ($segment_2 == "sortCategory" || $segment_2 == "sortCategoryUpdate") {
             $controller = "302";
             $function = "sort";
-        }else{
-            $this->session->set_flashdata('exception_1',lang('no_access'));
+        } else {
+            $this->session->set_flashdata('exception_1', lang('no_access'));
             redirect('Authentication/userProfile');
         }
-        if(!checkAccess($controller,$function)){
-            $this->session->set_flashdata('exception_1',lang('no_access'));
+        if (!checkAccess($controller, $function)) {
+            $this->session->set_flashdata('exception_1', lang('no_access'));
             redirect('Authentication/userProfile');
         }
     }
@@ -70,7 +72,8 @@ class Category extends Cl_Controller {
      * @return void
      */
 
-    public function addEditItemCategory($encrypted_id = "") {
+    public function addEditItemCategory($encrypted_id = "")
+    {
         $id = $this->custom->encrypt_decrypt($encrypted_id, 'decrypt');
         if (htmlspecialcharscustom($this->input->post('submit'))) {
             $add_more = $this->input->post($this->security->xss_clean('add_more'));
@@ -90,9 +93,9 @@ class Category extends Cl_Controller {
                     $this->Common_model->updateInformation($fmc_info, $id, "tbl_item_categories");
                     $this->session->set_flashdata('exception', lang('update_success'));
                 }
-                if($add_more == 'add_more'){
+                if ($add_more == 'add_more') {
                     redirect('Category/addEditItemCategory');
-                }else{
+                } else {
                     redirect('Category/itemCategories');
                 }
             } else {
@@ -129,12 +132,13 @@ class Category extends Cl_Controller {
      * @param int
      * @return void
      */
-    public function deleteItemCategory($id) {
+    public function deleteItemCategory($id)
+    {
         $id = $this->custom->encrypt_decrypt($id, 'decrypt');
         $this->Common_model->deleteStatusChange($id, "tbl_item_categories");
-        $this->session->set_flashdata('exception',lang('delete_success'));
+        $this->session->set_flashdata('exception', lang('delete_success'));
         redirect('Category/itemCategories');
-        
+
     }
 
     /**
@@ -143,10 +147,11 @@ class Category extends Cl_Controller {
      * @param no
      * @return void
      */
-    public function itemCategories() {
+    public function itemCategories()
+    {
         $company_id = $this->session->userdata('company_id');
         $data = array();
-        $data['itemCategories'] = $this->Common_model->getAllByCompanyIdWithAddedBy ($company_id, "tbl_item_categories");
+        $data['itemCategories'] = $this->Common_model->getAllByCompanyIdWithAddedBy($company_id, "tbl_item_categories");
         $data['main_content'] = $this->load->view('master/itemCategory/itemCategories', $data, TRUE);
         $this->load->view('userHome', $data);
     }
@@ -158,7 +163,8 @@ class Category extends Cl_Controller {
      * @param no
      * @return void
      */
-    public function sortCategory() {
+    public function sortCategory()
+    {
         $company_id = $this->session->userdata('company_id');
         $data = array();
         $data['itemCategories'] = $this->Common_model->getItemCategoriesBySorted($company_id, 'tbl_item_categories');
@@ -173,17 +179,19 @@ class Category extends Cl_Controller {
      * @param no
      * @return void
      */
-    public function sortCategoryUpdate() {
+    public function sortCategoryUpdate()
+    {
         $data = array();
-        if($this->input->post($this->security->xss_clean('ids'))){
-            $arr = explode(',',$this->input->post('ids'));
-            foreach($arr as $sortOrder => $id){
+        if ($this->input->post($this->security->xss_clean('ids'))) {
+            $arr = explode(',', $this->input->post('ids'));
+            foreach ($arr as $sortOrder => $id) {
                 $category = $this->db->query("SELECT id, sort_id FROM tbl_item_categories where id=$id")->row();
-                $data['sort_id'] = $sortOrder+1;
+                $data['sort_id'] = $sortOrder + 1;
                 $this->Common_model->updateInformation($data, $id, 'tbl_item_categories');
             }
             $response = [
-                'success'=>true,'message'=>'Caegory Successfully Sorted'
+                'success' => true,
+                'message' => 'Caegory Successfully Sorted'
             ];
             $this->output->set_content_type('application/json')->set_output(json_encode($response));
         }

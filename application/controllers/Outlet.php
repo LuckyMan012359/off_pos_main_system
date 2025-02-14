@@ -70,13 +70,10 @@ class Outlet extends Cl_Controller
 
     private function generateOutletKey($outlet_code, $email)
     {
-        // Concatenate outlet_code and email
         $data = $outlet_code . $email;
 
-        // Hash the data using SHA-256
         $hash = hash('sha256', $data);
 
-        // Truncate or encode the hash to 24 characters
         $key = substr($hash, 0, 24);
 
         $key = 'store_' . $key;
@@ -236,6 +233,7 @@ class Outlet extends Cl_Controller
     {
         $outlet_id = $this->custom->encrypt_decrypt($encrypted_id, 'decrypt');
         $outlet_details = $this->Common_model->getDataById($outlet_id, 'tbl_outlets');
+        echo json_encode($outlet_details);
         $outlet_session = array();
         $outlet_session['outlet_id'] = $outlet_details->id;
         $outlet_session['outlet_name'] = $outlet_details->outlet_name;
