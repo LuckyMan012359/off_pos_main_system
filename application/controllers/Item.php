@@ -351,7 +351,7 @@ class Item extends Cl_Controller
 
                     $product_info["opening_stock_data"] = $openingStockData;
 
-                    $nodejs_url = "http://localhost:5000/api/main/product/update-item"; // Change endpoint if needed
+                    $nodejs_url = "http://localhost:5000/api/main/product/update-item";
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $nodejs_url);
                     curl_setopt($ch, CURLOPT_POST, 1);
@@ -830,6 +830,36 @@ class Item extends Cl_Controller
     public function deleteItem($id)
     {
         $id = $this->custom->encrypt_decrypt($id, 'decrypt');
+
+        $item_data = $this->Common_model->getDataById($id, 'tbl_items');
+
+        $opening_stocks = $this->Common_model->getDataByField($id, 'tbl_set_opening_stocks', 'item_id');
+
+        foreach ($opening_stocks as $key => $opening_stock) {
+            if (is_object($opening_stock)) {
+                $opening_stock->outlet_data = $this->Common_model->getDataByField($opening_stock->outlet_id, 'tbl_outlets', 'id');
+            } elseif (is_array($opening_stock)) {
+                $opening_stock['outlet_data'] = $this->Common_model->getDataByField($opening_stock['outlet_id'], 'tbl_outlets', 'id');
+            }
+        }
+
+        $item_data->opening_stocks = $opening_stocks;
+
+        print_r(json_encode($item_data));
+
+        $nodejs_url = "http://localhost:5000/api/main/product/delete-item";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $nodejs_url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($item_data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen(json_encode($item_data))
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_exec($ch);
+        curl_close($ch);
+
         $this->Common_model->deleteStatusChange($id, "tbl_items");
         $this->Common_model->childItemDeleteStatusChange($id, "tbl_items");
         $this->Common_model->comboItemDeleteStatusChange($id);
