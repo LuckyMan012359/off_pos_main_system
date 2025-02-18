@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'कार्ट में जोड़ें';
 $lang['add_customer'] = 'ग्राहक जोड़ें';
 $lang['name'] = 'नाम';
 $lang['email'] = 'ईमेल';
+$lang['domain'] = 'कार्यक्षेत्र';
 $lang['generate_key'] = "कुंजी उत्पन्न करें";
 $lang['email_phone'] = 'ईमेल/फ़ोन';
 $lang['reset_step_1'] = 'पासवर्ड रीसेट करें चरण 1';

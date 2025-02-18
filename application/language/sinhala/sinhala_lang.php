@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'ගැලට එක් කරන්න';
 $lang['add_customer'] = 'පාරිභෝගික එකතු කරන්න';
 $lang['name'] = 'නම';
 $lang['email'] = 'විද්යුත් තැපෑල';
+$lang['domain'] = 'වසම';
 $lang['generate_key'] = "යතුර ජනනය කරන්න";
 $lang['email_phone'] = 'ඊමේල් / දුරකථන';
 $lang['reset_step_1'] = 'මුරපදය නැවත සකසන්න පියවර 1';

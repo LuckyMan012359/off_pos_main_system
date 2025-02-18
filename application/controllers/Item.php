@@ -91,6 +91,9 @@ class Item extends Cl_Controller
             $add_more = $this->input->post($this->security->xss_clean('add_more'));
             // Get Default Input value for condition checking
             $type = htmlspecialcharscustom($this->input->post('type'));
+
+            echo $type;
+
             $expiry_date_maintain = htmlspecialcharscustom($this->input->post('expiry_date_maintain'));
             // Global validation
             $this->form_validation->set_rules('type', lang('type'), 'required|max_length[30]');
@@ -100,6 +103,7 @@ class Item extends Cl_Controller
             $this->form_validation->set_rules('category_id', lang('category'), 'required|max_length[20]');
             $this->form_validation->set_rules('rack_id', lang('rack'), 'max_length[20]');
             $this->form_validation->set_rules('description', lang('description'), 'max_length[200]');
+
             // Set Single Unit And Double Unit
             if ($type == 'IMEI_Product' || $type == 'Serial_Product' || $type == 'Installment_Product' || $type == 'Combo_Product') {
                 $unit_type = 1;
@@ -251,6 +255,38 @@ class Item extends Cl_Controller
                     $sale_unit_name = $this->Common_model->getDataById($product_info['sale_unit_id'], 'tbl_units');
                     $product_info['sale_unit_name'] = $sale_unit_name->unit_name;
 
+                    $openingStockData = [];
+
+                    if ($type != 'Variation_Product') {
+                        if (isset($_POST['outlets']) && $_POST['outlets']) {
+                            foreach ($_POST['outlets'] as $key => $outlet) {
+                                $outlet_data = $this->Common_model->getDataById($outlet, 'tbl_outlets');
+                                $openingStockData[] = [
+                                    "outlet_id" => $outlet_data->id,
+                                    "outlet_name" => $outlet_data->outlet_name,
+                                    "api_key" => $outlet_data->token,
+                                    "domain" => $outlet_data->domain,
+                                    "quantity" => $_POST['quantity'][$key],
+                                    "conversion_rate" => $product_info['conversion_rate'],
+                                    "item_description" => $_POST['item_description'][$key]
+                                ];
+                            }
+                        }
+                    }
+
+                    if ($type == 'Combo_Product') {
+                        if (isset($_POST['combo_item_qty']) && $_POST['combo_item_qty']) {
+                            foreach ($_POST['combo_item_qty'] as $key => $combo_item) {
+                                $openingStockData[] = [
+                                    "combo_item_id" => $key,
+                                    "combo_item_quantity" => $combo_item,
+                                ];
+                            }
+                        }
+                    }
+
+                    $product_info["opening_stock_data"] = $openingStockData;
+
                     $nodejs_url = "http://localhost:5000/api/main/product/add-item";
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $nodejs_url);
@@ -290,6 +326,7 @@ class Item extends Cl_Controller
                     }
                     $this->session->set_flashdata('exception', lang('update_success'));
                 }
+
                 if ($type == 'Variation_Product') {
                     //update parent variation details
                     $variations = $this->input->post($this->security->xss_clean('variations'));

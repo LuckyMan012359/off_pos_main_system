@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'añadir a la cesta';
 $lang['add_customer'] = 'Agregar cliente';
 $lang['name'] = 'Nombre';
 $lang['email'] = 'Correo electrónico';
+$lang['domain'] = 'Dominio';
 $lang['generate_key'] = 'Generar clave';
 $lang['email_phone'] = 'Correo electrónico/teléfono';
 $lang['reset_step_1'] = 'Restablecer contraseña Paso 1';

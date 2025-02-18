@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'أضف إلى السلة';
 $lang['add_customer'] = 'إضافة العميل';
 $lang['name'] = 'اسم';
 $lang['email'] = 'بريد إلكتروني';
+$lang['domain'] = 'اِختِصاص';
 $lang['generate_key'] = 'إنشاء مفتاح';
 $lang['email_phone'] = 'البريد الإلكتروني / الهاتف';
 $lang['reset_step_1'] = 'إعادة تعيين كلمة المرور الخطوة 1';

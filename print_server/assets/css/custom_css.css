@@ -252,6 +252,12 @@
 .outlet_phone {
   text-align: center;
 }
+.token_container {
+  width: 20ch;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
 .copy_button {
   margin-bottom: .5rem;
   display: flex;

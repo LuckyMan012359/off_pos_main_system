@@ -69,9 +69,14 @@
                     <?php echo escape_output($value->email); ?>
                 </h4>
                 <?php } ?>
+                <?php if ($value->domain) { ?>
+                <h4 dir="ltr" class="outlet_phone"> <?php echo lang('domain'); ?>:
+                    <?php echo escape_output($value->domain); ?>
+                </h4>
+                <?php } ?>
                 <?php if ($value->token) { ?>
                 <div class="outlet_token">
-                    <h4 dir="ltr" class="outlet_phone"><?php echo lang("generate_key"); ?>:
+                    <h4 dir="ltr" class="outlet_phone token_container"><?php echo lang("generate_key"); ?>:
                         <span
                             id="token-text-<?php echo escape_output($value->id); ?>"><?php echo escape_output($value->token); ?></span>
                     </h4>

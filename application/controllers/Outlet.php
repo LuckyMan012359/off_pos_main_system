@@ -68,18 +68,17 @@ class Outlet extends Cl_Controller
      * @return void
      */
 
-    private function generateOutletKey($outlet_code, $email)
+    private function encryptData($data, $secretKey)
     {
-        $data = $outlet_code . $email;
+        $iv = openssl_random_pseudo_bytes(16);
 
-        $hash = hash('sha256', $data);
+        $key = hash('sha256', $secretKey, true);
 
-        $key = substr($hash, 0, 24);
+        $encrypted = openssl_encrypt($data, 'AES-256-CBC', $key, 0, $iv);
 
-        $key = 'store_' . $key;
-
-        return $key;
+        return base64_encode($iv . $encrypted);
     }
+
 
     public function addEditOutlet($encrypted_id = "")
     {
@@ -112,15 +111,22 @@ class Outlet extends Cl_Controller
                 $outlet_info = array();
                 $outlet_info['outlet_code'] = htmlspecialcharscustom($this->input->post($this->security->xss_clean('outlet_code')));
                 $outlet_info['outlet_name'] = htmlspecialcharscustom($this->input->post($this->security->xss_clean('outlet_name')));
-                $c_address = htmlspecialcharscustom($this->input->post($this->security->xss_clean('address'))); #clean the address
-                $outlet_info['address'] = preg_replace("/[\n\r]/", " ", $c_address); #remove new line from address
+                $c_address = htmlspecialcharscustom($this->input->post($this->security->xss_clean('address')));
+                $outlet_info['address'] = preg_replace("/[\n\r]/", " ", $c_address);
                 $outlet_info['phone'] = htmlspecialcharscustom($this->input->post($this->security->xss_clean('phone')));
                 $outlet_info['email'] = htmlspecialcharscustom($this->input->post($this->security->xss_clean('email')));
                 $outlet_info['active_status'] = htmlspecialcharscustom($this->input->post($this->security->xss_clean('active_status')));
+                $outlet_info['domain'] = htmlspecialcharscustom($this->input->post($this->security->xss_clean('domain')));
 
-                $outlet_code = $outlet_info['outlet_code'];
-                $email = $outlet_info['email'];
-                $key = $this->generateOutletKey($outlet_code, $email);  // Call the key generation function
+                $outlet_email = $outlet_info['email'];
+                $outlet_name = $outlet_info['outlet_name'];
+                $outlet_domain = str_replace("/", " ", $outlet_info['domain']);
+                $outlet_phone = $outlet_info['phone'];
+                $outlet_address = $outlet_info['address'];
+
+                $outlet_data = json_encode(["email" => $outlet_email, "name" => $outlet_name, "domain" => $outlet_domain, "phone" => $outlet_phone, "address" => $outlet_address]);
+
+                $key = $this->encryptData($outlet_data, "pos_system");
                 $outlet_info['token'] = $key;
 
                 if ($id == "") {

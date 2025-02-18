@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'ٹوکری میں شامل کریں';
 $lang['add_customer'] = 'کسٹمر شامل کریں۔';
 $lang['name'] = 'نام';
 $lang['email'] = 'ای میل';
+$lang['domain'] = 'دامنه';
 $lang['generate_key'] = 'ایجاد کلید';
 $lang['email_phone'] = 'ای میل / فون';
 $lang['reset_step_1'] = 'پاس ورڈ دوبارہ ترتیب دیں مرحلہ 1';

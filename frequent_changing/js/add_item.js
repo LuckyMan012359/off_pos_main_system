@@ -84,7 +84,7 @@ $(function ($) {
                 old_type = item_type;
             }
         }
-        
+
         fieldHideShowByItemType();
     });
 
@@ -425,7 +425,7 @@ $(function ($) {
 
 
 
-    // Opening Stock Validation 
+    // Opening Stock Validation
     $(document).on('focus', '#opening_stock', function(){
         $('#opening_stock_modal').modal('show');
         let type = $('.check_type').find(":selected").val();
@@ -452,12 +452,12 @@ $(function ($) {
         }else if(type == 'Variation_Product'){
             $('.expiry_add_more').html('');
             $('.expiry_heading').text('');
-            $(".quantity_trigger").prop("readonly", false);  
+            $(".quantity_trigger").prop("readonly", false);
         }else{
             $('.expiry_add_more').html('');
             $('.form_clear_trigger').html('');
             $('.expiry_heading').text('');
-            $(".quantity_trigger").prop("readonly", false);  
+            $(".quantity_trigger").prop("readonly", false);
         }
     });
 
@@ -528,7 +528,7 @@ $(function ($) {
             himself = $(this);
             item_id = $(this).attr('data-item');
             outlet_id = $(this).attr('data-outlet');
-            
+
             $.ajax({
                 type: "POST",
                 url: base_url_+"Item/stockQtyCheck",
@@ -581,7 +581,7 @@ $(function ($) {
             }else{
                 $(this).val('');
             }
-            
+
         }
     });
 
@@ -614,10 +614,10 @@ $(function ($) {
     });
 
 
-    function checkDistinct(array) { 
-        const checkSet = new Set(array); 
-        return checkSet.size === array.length;   
-    } 
+    function checkDistinct(array) {
+        const checkSet = new Set(array);
+        return checkSet.size === array.length;
+    }
 
     $(document).on('change', '.expiryProduct', function(){
         let outlet_id = $(this).attr('data-outlet');
@@ -704,7 +704,7 @@ $(function ($) {
                 }
             });
             // Unique IMEI Number or Serial Number Check
-            const isUnique = (itemsArr) => 
+            const isUnique = (itemsArr) =>
             itemsArr.length === new Set(itemsArr).size
             if(isUnique(itemsArr) == false){
                 error = true;
@@ -765,7 +765,7 @@ $(function ($) {
                     existMatch = 'Match';
                     error = true;
                 }
-                if (getVal == ''){  
+                if (getVal == ''){
                     $(this).css("border-color","red");
                     error = true;
                 }else{
@@ -782,7 +782,7 @@ $(function ($) {
                     confirmButtonText: `OK`
                 });
             }
- 
+
 
             $('.expiry_child_qty').each(function(){
                 expiry_child_qty = $(this).val();
@@ -841,7 +841,7 @@ $(function ($) {
             });
             $('#opening_stock_variation_'+stock_field).val(quantitySum);
         }
-        
+
         if(error == true || unique_err == true){
             return false;
         }else{
@@ -951,7 +951,7 @@ $(function ($) {
                                 }
                             }
                         });
-                    } 
+                    }
                 }
             }
         });
@@ -1034,7 +1034,7 @@ $(function ($) {
                                 }
                             }
                         });
-                    } 
+                    }
                 }
             }
         });
@@ -1084,7 +1084,7 @@ $(function ($) {
                 }
             }
         });
-        
+
     });
 
     // Add Supplier By Ajax
@@ -1158,7 +1158,7 @@ $(function ($) {
             }
         });
 
-        
+
     });
 
 
@@ -1184,7 +1184,7 @@ $(function ($) {
                 }
             }
         });
-        
+
     });
     // Add Brand By Ajax
     $(document).on('click', '#addBrand', function () {
@@ -1490,7 +1490,7 @@ $(function ($) {
                 }
             }
         });
-        
+
     });
     // Add Unit By Ajax
     $(document).on('click', '#addSaleUnit', function () {
@@ -1713,7 +1713,7 @@ $(function ($) {
     if(add_edit_mode == 'add_mode'){
         profitMargin();
     }
-    
+
     $(document).on('keydown', '#profit_margin_val', function(){
         profitMargin();
     });

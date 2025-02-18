@@ -203,6 +203,7 @@ $lang['add_to_cart'] = 'Thêm vào giỏ hàng';
 $lang['add_customer'] = 'Thêm khách hàng';
 $lang['name'] = 'Tên';
 $lang['email'] = 'Email';
+$lang['domain'] = 'Lãnh địa';
 $lang['generate_key'] = 'Tạo khóa';
 $lang['email_phone'] = 'Email / Điện thoại';
 $lang['reset_step_1'] = 'Bước 1: Đặt lại mật khẩu';
