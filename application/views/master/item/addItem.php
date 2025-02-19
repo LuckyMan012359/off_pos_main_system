@@ -1388,7 +1388,6 @@
                         <br>
                         <input type="file" class="form-control" id="upload">
                     </div>
-
                 </div>
             </div>
             <div class="modal-footer">
