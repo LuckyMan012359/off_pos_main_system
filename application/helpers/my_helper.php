@@ -800,7 +800,7 @@ if(!function_exists('createInstallmentNotifications')){
  * @return string
  */
 if(!function_exists('dateFormatMaster')){
-    function dateFormatMaster($paramDate='') { 
+    function dateFormatMaster($paramDate='') {
         $CI = & get_instance();
         $company_info = getMainCompany();
         $dateFormate = $company_info->date_format;
@@ -822,7 +822,7 @@ if(!function_exists('dateFormatMaster')){
  * @return string
  */
 if(!function_exists('dateFormat')){
-    function dateFormat($paramDate='') { 
+    function dateFormat($paramDate='') {
         $CI = & get_instance();
         $dateFormate = $CI->session->userdata('date_format');
         if($paramDate == ''){
@@ -843,7 +843,7 @@ if(!function_exists('dateFormat')){
  * @return string
  */
 if(!function_exists('dateFormatWithTime')){
-    function dateFormatWithTime($paramDate='') { 
+    function dateFormatWithTime($paramDate='') {
         $CI = & get_instance();
         $dateFormate = $CI->session->userdata('date_format');
         $separate = explode(" ",$paramDate);
@@ -878,7 +878,7 @@ if(!function_exists('generatedOnCurrentDateTime')){
             return "Error: " . $e->getMessage();
         }
     }
-} 
+}
 
 /**
  * getAllPaymentMethodBySaleId
@@ -1333,32 +1333,32 @@ if (!function_exists('getAllCustomersWithOpeningBalance')) {
     function getAllCustomersWithOpeningBalance(){
         $CI = & get_instance();
         $company_id = $CI->session->userdata('company_id');
-        $query = "SELECT 
+        $query = "SELECT
         c.id, c.name, c.phone, c.email, c.address, c.opening_balance, c.opening_balance_type,
         c.credit_limit, c.gst_number, c.customer_type, c.discount, c.price_type,
         c.same_or_diff_state, c.del_status, c.added_date, u.full_name AS added_by,
-        CASE 
-            WHEN c.opening_balance_type = 'Credit' THEN 
+        CASE
+            WHEN c.opening_balance_type = 'Credit' THEN
                 - c.opening_balance + COALESCE(sale_sum.due_amount_sum, 0) - COALESCE(due_receive_sum.amount_sum, 0) - COALESCE(return_sum.total_return_amount_sum, 0)
-            ELSE 
+            ELSE
                 c.opening_balance + COALESCE(sale_sum.due_amount_sum, 0) - COALESCE(due_receive_sum.amount_sum, 0) - COALESCE(return_sum.total_return_amount_sum, 0)
         END AS opening_balance
-        FROM 
+        FROM
             tbl_customers c
-        LEFT JOIN 
+        LEFT JOIN
             (SELECT customer_id, COALESCE(SUM(due_amount), 0) AS due_amount_sum FROM tbl_sales WHERE del_status = 'Live' GROUP BY customer_id) AS sale_sum ON c.id = sale_sum.customer_id
-        LEFT JOIN 
+        LEFT JOIN
             (SELECT customer_id, COALESCE(SUM(amount), 0) AS amount_sum FROM tbl_customer_due_receives WHERE del_status = 'Live' GROUP BY customer_id) AS due_receive_sum ON c.id = due_receive_sum.customer_id
-        LEFT JOIN 
+        LEFT JOIN
             (SELECT customer_id, COALESCE(SUM(total_return_amount), 0) AS total_return_amount_sum FROM tbl_sale_return WHERE del_status = 'Live' GROUP BY customer_id) AS return_sum ON c.id = return_sum.customer_id
-        LEFT JOIN 
+        LEFT JOIN
             tbl_users u ON u.id = c.user_id
         WHERE
             c.company_id = ? AND c.del_status = 'Live'
-        GROUP BY 
+        GROUP BY
             c.id DESC";
         $result = $CI->db->query($query, array($company_id))->result();
-        return $result;  
+        return $result;
     }
 }
 
@@ -1621,7 +1621,7 @@ if (!function_exists('getCurrentStock')) {
         $result = $CI->db->query("SELECT i.*,
                 (select SUM(quantity_amount) from tbl_purchase_details where item_id=i.id AND outlet_id=$outlet_id AND del_status='Live') total_purchase,
 
-                (select SUM(stock_quantity) from tbl_set_opening_stocks where item_id=i.id AND outlet_id=$outlet_id AND del_status='Live') stock_quantity, 
+                (select SUM(stock_quantity) from tbl_set_opening_stocks where item_id=i.id AND outlet_id=$outlet_id AND del_status='Live') stock_quantity,
 
                 (select SUM(qty) from tbl_sales_details  where food_menu_id=i.id AND outlet_id=$outlet_id AND tbl_sales_details.del_status='Live') total_sale,
 
@@ -1855,7 +1855,7 @@ if (!function_exists('getItemParentAndChildNameCode')) {
 if (!function_exists('getItemParentId')) {
     function getItemParentId($id) {
         $CI = & get_instance();
-        $resutl = $CI->db->query("SELECT parent_id FROM tbl_items 
+        $resutl = $CI->db->query("SELECT parent_id FROM tbl_items
         WHERE id = $id")->row();
         if (!empty($resutl)) {
             return $resutl->parent_id;
@@ -2180,7 +2180,7 @@ if (!function_exists('escape_output')) {
             $output = htmlentities($string, ENT_QUOTES, 'UTF-8');
             $output = str_replace("&amp;", "&",$output);
             return $output;
-        }else{ 
+        }else{
             return '';
         }
     }
@@ -2736,14 +2736,14 @@ if (!function_exists('sendEmailOnly')) {
         //sender email getting from site setting
         if($company->smtp_enable_status == '1'){
             if($company->smtp_type== "Gmail"){
-                $emailSetting = json_decode($company->smtp_details);  
+                $emailSetting = json_decode($company->smtp_details);
                 $CI = &get_instance();
                 // Load PHPMailer library
                 $CI->load->library('phpmailer_lib');
                 // PHPMailer object
                 $mail = $CI->phpmailer_lib->load();
                 // SMTP configuration
-                $mail->isSMTP(); 
+                $mail->isSMTP();
                 // $mail->SMTPDebug  = 1;
                 $mail->Host     = $emailSetting->host_name;
                 $mail->SMTPAuth = true;
@@ -2775,7 +2775,7 @@ if (!function_exists('sendEmailOnly')) {
         } else {
             $CI->session->set_flashdata('exception',lang('your_smtp_not_configured'));
         }
-        
+
     }
 }
 
@@ -2832,7 +2832,7 @@ if (!function_exists('banglaNumber')) {
     function banglaNumber($int) {
         $engNumber = array('1', '2', '3', '4', '5', '6', '7', '8', '9', '0');
         $bangNumber = array('১', '২', '৩', '৪', '৫', '৬', '৭', '৮', '৯', '০');
-        $converted = str_replace($engNumber, $bangNumber, strval($int)); 
+        $converted = str_replace($engNumber, $bangNumber, strval($int));
         return $converted;
     }
 }
@@ -3000,12 +3000,49 @@ if (!function_exists('getItemTaxByItemId')) {
  * @return string
  */
 if (!function_exists('getCompanyInfoByAPIKey')) {
+    function decryptData($encryptedData, $secretKey)
+    {
+        $decodedData = base64_decode($encryptedData);
+
+        $iv = substr($decodedData, 0, 16);
+
+        $encrypted = substr($decodedData, 16);
+
+        $key = hash('sha256', $secretKey, true);
+
+        return openssl_decrypt($encrypted, 'AES-256-CBC', $key, 0, $iv);
+    }
+
     function getCompanyInfoByAPIKey($api_key) {
-        $CI = & get_instance();
+        $decryptString = decryptData($api_key, "pos_system");
+
+        $outlet_data = json_decode($decryptString, true);
+
+        if (!$outlet_data || !isset($outlet_data["email"]) || !isset($outlet_data["name"]) || !isset($outlet_data["address"]) || !isset($outlet_data["phone"])) {
+            return null;
+        }
+
+        $CI = &get_instance();
+        $CI->db->select("*");
+        $CI->db->from("tbl_outlets");
+        $CI->db->where("email", $outlet_data["email"]);
+        $CI->db->where("outlet_name", $outlet_data["name"]);
+        $CI->db->where("address", $outlet_data["address"]);
+        $CI->db->where("phone", $outlet_data["phone"]);
+        $result = $CI->db->get()->row();
+
+        // if (!$result) {
+        //     return null;
+        // }
+
         $CI->db->select("*");
         $CI->db->from("tbl_companies");
-        $CI->db->where("api_token", $api_key);
-        return $CI->db->get()->row();
+        $CI->db->where("user_id", $result->user_id);
+        $CI->db->order_by("id", "ASC");
+        $CI->db->limit(1);
+        $company_data = $CI->db->get()->row();
+
+        return $company_data ? $company_data : null;
     }
 }
 /**
@@ -3287,7 +3324,7 @@ if (!function_exists('sendWhatsAppMessge')) {
             if (!file_exists($filePath)) {
                 return "Error: File not found.";
             }
-            
+
             curl_setopt_array($curl, array(
                 CURLOPT_URL => 'https://whats-api.rcsoft.in/api/create-message',
                 CURLOPT_RETURNTRANSFER => true,
@@ -3303,12 +3340,12 @@ if (!function_exists('sendWhatsAppMessge')) {
                     'to' => $phone,
                     'message' => $body,
                     'sandbox' => 'false',
-                    'file' => new CURLFile($filePath) 
+                    'file' => new CURLFile($filePath)
                 ),
             ));
             curl_exec($curl);
             curl_close($curl);
-        }   
+        }
     }
 }
 
@@ -3474,26 +3511,26 @@ if (!function_exists('smsinBD')) {
         $CI = &get_instance();
         $company_id = $CI->session->userdata('company_id');
         $company = companyInformation($company_id);
-        $post_url = "http://api.smsinbd.com/sms-api/sendsms" ;  
-        $post_values = array( 
+        $post_url = "http://api.smsinbd.com/sms-api/sendsms" ;
+        $post_values = array(
             'api_token' => 'x6rOGWgObd9dYIy2y1vlpcreZbIFibxR9VELNscX',
             'senderid' => '8801969908462',
             'message' => $msg,
             'contact_number' => $to,
         );
         $post_string = "";
-        foreach( $post_values as $key => $value ){ 
-            $post_string .= "$key=" . urlencode( $value ) . "&"; 
+        foreach( $post_values as $key => $value ){
+            $post_string .= "$key=" . urlencode( $value ) . "&";
         }
         $post_string = rtrim( $post_string, "& ");
         $request = curl_init($post_url);
         curl_setopt($request, CURLOPT_HEADER, 0);
-        curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);  
-        curl_setopt($request, CURLOPT_POSTFIELDS, $post_string); 
-        curl_setopt($request, CURLOPT_SSL_VERIFYPEER, FALSE);  
-        $post_response = curl_exec($request);  
-        curl_close ($request);  
-        $array =  json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $post_response), true );   
+        curl_setopt($request, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($request, CURLOPT_POSTFIELDS, $post_string);
+        curl_setopt($request, CURLOPT_SSL_VERIFYPEER, FALSE);
+        $post_response = curl_exec($request);
+        curl_close ($request);
+        $array =  json_decode( preg_replace('/[\x00-\x1F\x80-\xFF]/', '', $post_response), true );
         if($array){
             //status of the request
             echo $array['status'] ;
@@ -4904,7 +4941,7 @@ if (!function_exists('setAveragePrice')) {
                     $average_total_price = $product_information->purchase_price;
                 }else{
                     $average_total_price = 0;
-                }  
+                }
             }
         }
         if(isset($last_purchase_single->unit_price) && $last_purchase_single->unit_price){
@@ -4997,47 +5034,47 @@ if (!function_exists('getOpeningItemTracking')) {
                 $d_outlet_id = '';
             }
             $total_opening_stock = $CI->db->query("SELECT SUM(op.stock_quantity) as total_opening_stock
-            FROM tbl_set_opening_stocks op 
+            FROM tbl_set_opening_stocks op
             WHERE op.item_id=$item_id and op.del_status='Live' AND op.company_id = $company_id $op_outlet")->row();
 
             $total_sale_qty = $CI->db->query("SELECT SUM(sd.qty) as total_sale_qty
-            FROM tbl_sales s 
-            Join tbl_sales_details sd ON sd.sales_id = s.id 
+            FROM tbl_sales s
+            Join tbl_sales_details sd ON sd.sales_id = s.id
             WHERE sd.food_menu_id=$item_id and s.del_status='Live' AND s.company_id = $company_id AND s.sale_date < '$opDate' $s_outlet")->row();
 
             $total_sale_return_qty = $CI->db->query("SELECT SUM(srd.return_quantity_amount) total_sale_return_qty
-            FROM tbl_sale_return sr 
-            Join tbl_sale_return_details srd ON srd.sale_return_id = sr.id 
+            FROM tbl_sale_return sr
+            Join tbl_sale_return_details srd ON srd.sale_return_id = sr.id
             WHERE srd.item_id=$item_id and sr.del_status='Live' AND sr.company_id = $company_id AND date < '$opDate' $sr_outlet")->row();
 
             $total_installment_item = $CI->db->query("SELECT COUNT(i.item_id) as total_installment_item
             FROM tbl_installments i
-            WHERE item_id=$item_id and del_status='Live' AND company_id = $company_id AND date < '$opDate' $i_outlet")->row(); 
+            WHERE item_id=$item_id and del_status='Live' AND company_id = $company_id AND date < '$opDate' $i_outlet")->row();
 
             $total_purchase_qty = $CI->db->query("SELECT SUM(pd.quantity_amount) as total_purchase_qty
-            FROM tbl_purchase p 
-            Join tbl_purchase_details pd ON pd.purchase_id = p.id 
+            FROM tbl_purchase p
+            Join tbl_purchase_details pd ON pd.purchase_id = p.id
             WHERE pd.item_id=$item_id and p.del_status='Live' AND p.company_id = $company_id AND p.date < '$opDate' $p_outlet_id")->row();
 
             $total_purchase_return_qty = $CI->db->query("SELECT SUM(prd.return_quantity_amount) as total_purchase_return_qty
-            FROM tbl_purchase_return pr 
-            Join tbl_purchase_return_details prd ON prd.pur_return_id = pr.id 
+            FROM tbl_purchase_return pr
+            Join tbl_purchase_return_details prd ON prd.pur_return_id = pr.id
             WHERE prd.item_id=$item_id and pr.del_status='Live' AND pr.company_id = $company_id AND pr.date < '$opDate' $pr_outlet_id")->row();
 
             $total_damage_qty = $CI->db->query("SELECT SUM(dd.damage_quantity) as total_damage_qty
-            FROM tbl_damages d 
-            Join tbl_damage_details dd ON dd.damage_id = d.id 
-            WHERE dd.item_id=$item_id and d.del_status='Live' AND d.company_id = $company_id AND d.date < '$opDate' $d_outlet_id")->row(); 
+            FROM tbl_damages d
+            Join tbl_damage_details dd ON dd.damage_id = d.id
+            WHERE dd.item_id=$item_id and d.del_status='Live' AND d.company_id = $company_id AND d.date < '$opDate' $d_outlet_id")->row();
 
             $total_transferin_qty = $CI->db->query("SELECT SUM(tdin.quantity_amount) as total_transferin_qty
-            FROM tbl_transfer tin 
-            Join tbl_transfer_items tdin ON tdin.transfer_id = tin.id 
-            WHERE tdin.ingredient_id=$item_id and tin.del_status='Live' AND tin.company_id = $company_id AND tdin.status = '1' AND tdin.to_outlet_id='$outlet_id' AND tin.date < '$opDate'")->row(); 
+            FROM tbl_transfer tin
+            Join tbl_transfer_items tdin ON tdin.transfer_id = tin.id
+            WHERE tdin.ingredient_id=$item_id and tin.del_status='Live' AND tin.company_id = $company_id AND tdin.status = '1' AND tdin.to_outlet_id='$outlet_id' AND tin.date < '$opDate'")->row();
 
             $total_transferout_qty = $CI->db->query("SELECT SUM(tdout.quantity_amount) as total_transferout_qty
             FROM tbl_transfer tout
-            Join tbl_transfer_items tdout ON tdout.transfer_id = tout.id 
-            WHERE tdout.ingredient_id=$item_id and tout.del_status='Live' AND tout.company_id = $company_id AND tdout.status = '3' AND tdout.from_outlet_id='$outlet_id' AND tout.date < '$opDate'")->row(); 
+            Join tbl_transfer_items tdout ON tdout.transfer_id = tout.id
+            WHERE tdout.ingredient_id=$item_id and tout.del_status='Live' AND tout.company_id = $company_id AND tdout.status = '3' AND tdout.from_outlet_id='$outlet_id' AND tout.date < '$opDate'")->row();
 
             $opening_item = $total_opening_stock->total_opening_stock - $total_sale_qty->total_sale_qty + $total_sale_return_qty->total_sale_return_qty - $total_installment_item->total_installment_item + $total_purchase_qty->total_purchase_qty - $total_purchase_return_qty->total_purchase_return_qty - $total_damage_qty->total_damage_qty - $total_transferout_qty->total_transferout_qty + $total_transferin_qty->total_transferin_qty;
             return $opening_item;
@@ -5120,7 +5157,7 @@ if (!function_exists('getItemNameCodeBrandByItemId')) {
         $CI->db->where('i.del_status', 'Live');
         $result = $CI->db->get()->row();
         if($result){
-            $string = ($result->parent_name != '' ? $result->parent_name . ' - ' : '') . ($result->name) . ($result->brand_name != '' ? ' - ' . $result->brand_name : '') . ( ' - ' . $result->code); 
+            $string = ($result->parent_name != '' ? $result->parent_name . ' - ' : '') . ($result->name) . ($result->brand_name != '' ? ' - ' . $result->brand_name : '') . ( ' - ' . $result->code);
         }else{
             $string = '';
         }
@@ -5166,7 +5203,7 @@ if (!function_exists('getItemAndParntName')) {
             $CI->db->where('i.del_status', 'Live');
             $result = $CI->db->get()->row();
             if($result){
-                $string = ($result->parent_name != '' ? $result->parent_name . ' - ' : '') . ($result->name); 
+                $string = ($result->parent_name != '' ? $result->parent_name . ' - ' : '') . ($result->name);
             }else{
                 $string = '';
             }
@@ -5326,7 +5363,7 @@ if (!function_exists('getItemParentName')) {
             }else {
                 $result = 0;
             }
-            return $result; 
+            return $result;
         }
     }
 
@@ -5517,7 +5554,7 @@ if (!function_exists('getItemParentName')) {
         }
     }
 
-    
+
     /**
      * get Company Info
      * @access public
@@ -5739,7 +5776,7 @@ if (!function_exists('getItemParentName')) {
 
     /**
      * dueInstallmentNotify
-     * @param 
+     * @param
      * @return object
      */
     if (!function_exists('dueInstallmentNotify')) {
@@ -5753,13 +5790,13 @@ if (!function_exists('getItemParentName')) {
             $CI->db->where('outlet_id', $outlet_id);
             $CI->db->where('company_id', $company_id);
             $CI->db->delete('tbl_notifications');
-            
+
             $CI->db->select("ii.amount_of_payment, ii.paid_amount, ii.payment_date, ii.installment_id, i.customer_id, c.name as customer_name, c.phone as customer_phone, i.item_id, it.name as item_name, i.added_date");
             $CI->db->from("tbl_installment_items ii");
             $CI->db->join('tbl_installments i', 'i.id = ii.installment_id', 'right');
             $CI->db->join('tbl_customers c', 'c.id = i.customer_id', 'left');
             $CI->db->join('tbl_items it', 'it.id = i.item_id', 'left');
-            
+
             $CI->db->where("ii.outlet_id", $outlet_id);
             $CI->db->where("ii.company_id", $company_id);
             $CI->db->where("ii.del_status", 'Live');
@@ -5781,12 +5818,12 @@ if (!function_exists('getItemParentName')) {
                     $data['date'] = date('Y-d-m');
                     $CI->Common_model->insertInformation($data, "tbl_notifications");
                 }
-            } 
-        } 
+            }
+        }
     }
     /**
      * dueInstallmentReminderToCustomer
-     * @param 
+     * @param
      * @return object
      */
     if (!function_exists('dueInstallmentReminderToCustomer')) {
@@ -5816,14 +5853,14 @@ if (!function_exists('getItemParentName')) {
                     Regards,
                     '.$item->full_name.'
                     '.$item->outlet_name.'';
-                    smsSendOnly($message_content, $item->customer_phone); 
+                    smsSendOnly($message_content, $item->customer_phone);
                 }
-            } 
-        } 
+            }
+        }
     }
     /**
      * getChildModule
-     * @param 
+     * @param
      * @return object
      */
     if (!function_exists('getChildModule')) {
@@ -5839,11 +5876,11 @@ if (!function_exists('getItemParentName')) {
             }else{
                 return false;
             }
-        } 
+        }
     }
     /**
      * getAllChildModule
-     * @param 
+     * @param
      * @return object
      */
     if (!function_exists('getAllChildModule')) {
@@ -5860,7 +5897,7 @@ if (!function_exists('getItemParentName')) {
             }else{
                 return false;
             }
-        } 
+        }
     }
 
 
@@ -5883,12 +5920,12 @@ if (!function_exists('getItemParentName')) {
             }
             $p_d_value = '';
             foreach ($baseNames as $baseName) {
-                $p_d = explode("_version_",$baseName); 
+                $p_d = explode("_version_",$baseName);
                 if(isset($p_d[1]) && $p_d[0] == "ck_editor"){
                     $p_d_value = $p_d[1];
                 }
             }
-             $data = (object) (d_data($p_d_value)); 
+             $data = (object) (d_data($p_d_value));
             if($data){
                 return $data;
             }else {
@@ -5957,7 +5994,7 @@ if (!function_exists('getItemParentName')) {
             }
         }
     }
-    
+
     // Function to decrypt data using AES-128-CBC with zero padding
     function d_data($encrypted_data) {
         $key = hex2bin("5126b6af4f15d73a20c60676b0f226b2"); // 128-bit key
@@ -6020,7 +6057,7 @@ if (!function_exists('getItemParentName')) {
         }
     }
 
-    
+
 
     /**
      * getLastSaleNo
@@ -6164,9 +6201,9 @@ if (!function_exists('getItemParentName')) {
         }else{
             return $output;
         }
-        
+
     }
-    
+
 
     /**
      * getBarcodeSetting
@@ -6218,11 +6255,11 @@ if (!function_exists('getItemParentName')) {
     //         $inv_config = json_decode($invoice_configuration);
     //         return $inv_config;
 
-            
+
     //         let inv_number_of_digit = parseInt($('#inv_number_of_digit').val());
-            
-            
-            
+
+
+
     //         $currentYear = date('Y');
     //         $output = "";
     //         if ($inv_config->inv_numbering_type === 'Sequential') {
@@ -6323,6 +6360,3 @@ if (!function_exists('getItemParentName')) {
             return trim($result);
         }
     }
-    
-    
-
