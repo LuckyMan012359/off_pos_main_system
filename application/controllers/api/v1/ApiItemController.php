@@ -151,7 +151,8 @@ class ApiItemController extends REST_Controller
                     if ($insertedId) {
                         $response = array(
                             'status' => 200,
-                            'message' => 'Data inserted successful.'
+                            'message' => 'Data inserted successful.',
+                            'opening_stock' => $opening_stock
                         );
                     } else {
                         $response = array(
@@ -419,12 +420,12 @@ class ApiItemController extends REST_Controller
             $fmi = array();
             $fmi['item_id'] = $insertedId;
             $fmi['item_type'] = $item_type;
-            $fmi['item_description'] = $op_stock['iem_description'];
-            $fmi['stock_quantity'] = $op_stock['stock_quantity'] * $conversion_rate;
+            $fmi['item_description'] = $op_stock['item_description'];
+            $fmi['stock_quantity'] = $op_stock['quantity'] * $conversion_rate;
             $fmi['outlet_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($outlet_name, 'outlet_name', 'tbl_outlets', $user_id, $company_id);
             $fmi['user_id'] = $user_id;
             $fmi['company_id'] = $company_id;
-            if ($op_stock['stock_quantity'] != '') {
+            if ($op_stock['quantity'] != '') {
                 $this->Common_model->insertInformation($fmi, 'tbl_set_opening_stocks');
             }
         }
