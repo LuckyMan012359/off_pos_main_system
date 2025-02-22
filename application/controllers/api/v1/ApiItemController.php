@@ -93,6 +93,8 @@ class ApiItemController extends REST_Controller
                 $itemArr['alternative_name'] = $item_info['alternative_name'];
                 $itemArr['type'] = $item_info['type'];
                 $itemArr['p_type'] = $item_info['type'];
+                $itemArr['loyalty_point'] = $item_info['loyalty_point'];
+                $itemArr['profit_margin'] = $item_info['profit_margin'];
                 if ($item_info['category_name'] != '') {
                     $itemArr['category_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($item_info['category_name'], 'name', 'tbl_item_categories', 0, $company_id);
                 } else {
@@ -266,9 +268,11 @@ class ApiItemController extends REST_Controller
     public function updateItem_post()
     {
         $item_info = json_decode(file_get_contents("php://input"), true);
-        $item_id = $item_info['id'];
-        $find_item_id = $this->Common_model->getFindId($item_id, 'tbl_items');
-        if ($find_item_id) {
+        // $item_id = $item_info['id'];
+        $item_code = $item_info['code'];
+        $find_item_id = getItemData($item_code);
+        $outlet = $this->Common_model->getDataByField($item_info['domain'], 'tbl_outlets', 'domain');
+        if ($find_item_id && $outlet) {
             $item_updated_id = $find_item_id->id;
             $company_info = getCompanyInfoByAPIKey($item_info['api_auth_key']);
             if ($company_info) {
@@ -277,10 +281,14 @@ class ApiItemController extends REST_Controller
                 $unit_type = $item_info['unit_type'];
                 $opening_stock = json_decode(str_replace("'", '"', $item_info['opening_stock']), true);
                 $itemArr = array();
+                $itemArr['code'] = $item_info['code'];
                 $itemArr['name'] = $item_info['name'];
+                $itemArr['photo'] = $item_info['photo'];
                 $itemArr['alternative_name'] = $item_info['alternative_name'];
                 $itemArr['type'] = $item_info['type'];
                 $itemArr['p_type'] = $item_info['type'];
+                $itemArr['loyalty_point'] = $item_info['loyalty_point'];
+                $itemArr['profit_margin'] = $item_info['profit_margin'];
                 if ($item_info['category_name'] != '') {
                     $itemArr['category_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($item_info['category_name'], 'name', 'tbl_item_categories', $user_id, $company_id);
                 } else {
@@ -382,15 +390,25 @@ class ApiItemController extends REST_Controller
     {
         $item_info = json_decode(file_get_contents("php://input"), true);
         $item_id = $item_info['id'];
-        $item_data2 = $this->Common_model->getFindId($item_id, 'tbl_items');
-        if ($item_data2) {
-            $this->Common_model->deleteStatusChange($item_id, "tbl_items");
-            $this->Common_model->childItemDeleteStatusChange($item_id, "tbl_items");
-            $this->Common_model->openingStockItemDeleteStatusChange($item_id);
-            $response = [
-                'status' => 200,
-                'data' => 'Item Deleted Successfully',
-            ];
+        $item_code = $item_info['code'];
+        $find_item_id = getItemData($item_code);
+        if ($find_item_id) {
+            $company_info = getCompanyInfoByAPIKey($item_info['api_auth_key']);
+            $outlet = $this->Common_model->getDataByField($item_info['domain'], 'tbl_outlets', 'domain');
+            if ($company_info && $outlet) {
+                $this->Common_model->deleteStatusChange($find_item_id->id, "tbl_items");
+                $this->Common_model->childItemDeleteStatusChange($find_item_id->id, "tbl_items");
+                $this->Common_model->openingStockItemDeleteStatusChange($find_item_id->id);
+                $response = [
+                    'status' => 200,
+                    'data' => 'Item Deleted Successfully',
+                ];
+            } else {
+                $response = array(
+                    'status' => 500,
+                    'message' => 'API Key is not valid',
+                );
+            }
         } else {
             $response = [
                 'status' => 404,

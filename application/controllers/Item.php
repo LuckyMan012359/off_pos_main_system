@@ -391,7 +391,6 @@ class Item extends Cl_Controller
                 }
 
                 if ($type == 'Variation_Product') {
-                    //update parent variation details
                     $variations = $this->input->post($this->security->xss_clean('variations'));
                     if ($variations) {
                         $main_arr = array();
