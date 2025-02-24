@@ -349,6 +349,15 @@ class Item extends Cl_Controller
                         }
                     }
 
+                    $preview_opening_stock_data = $this->Common_model->getDataByField($id, 'tbl_set_opening_stocks', 'item_id');
+
+                    foreach ($preview_opening_stock_data as $key => $value) {
+                        $outlet_info = $this->Common_model->getDataByField($value->outlet_id, 'tbl_outlets', 'id');
+                        $value->outlet_data = $outlet_info;
+                    }
+
+                    $product_info['preview_opening_stock_data'] = $preview_opening_stock_data;
+
                     $product_info["opening_stock_data"] = $openingStockData;
 
                     $nodejs_url = "http://localhost:5000/api/main/product/update-item";

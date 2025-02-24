@@ -380,6 +380,15 @@ class ApiItemController extends REST_Controller
 
                 $opening_stocks = $this->Common_model->getDataByField($item_updated_id, 'tbl_set_opening_stocks', 'item_id');
 
+                $preview_opening_stock_data = $this->Common_model->getDataByField($item_updated_id, 'tbl_set_opening_stocks', 'item_id');
+
+                foreach ($preview_opening_stock_data as $key => $value) {
+                    $outlet_info = $this->Common_model->getDataByField($value->outlet_id, 'tbl_outlets', 'id');
+                    $value->outlet_data = $outlet_info;
+                }
+
+                $item_info['preview_opening_stock_data'] = $preview_opening_stock_data;
+
                 $openingStockData = [];
 
                 if ($itemArr['type'] != 'Variation_Product') {
@@ -408,7 +417,7 @@ class ApiItemController extends REST_Controller
                     }
                 }
 
-                $item_info['opening_stock_data'] = json_encode($openingStockData);
+                $item_info['opening_stock_data'] = $openingStockData;
                 $item_info['p_type'] = $item_info['type'];
 
                 if ($item_info['unit_type'] == 'Single Unit') {
