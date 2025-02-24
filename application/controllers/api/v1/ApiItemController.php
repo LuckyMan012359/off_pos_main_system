@@ -508,12 +508,21 @@ class ApiItemController extends REST_Controller
             $company_info = getCompanyInfoByAPIKey($item_info['api_auth_key']);
             $outlet = $this->Common_model->getDataByField($item_info['domain'], 'tbl_outlets', 'domain');
             if ($company_info && $outlet) {
-                $this->Common_model->deleteStatusChange($find_item_id->id, "tbl_items");
-                $this->Common_model->childItemDeleteStatusChange($find_item_id->id, "tbl_items");
-                $this->Common_model->openingStockItemDeleteStatusChange($find_item_id->id);
+                $opening_stocks = $this->Common_model->getDataByField($find_item_id->id, 'tbl_set_opening_stocks', 'item_id');
+
+                if (count($opening_stocks) > 1) {
+                    $this->Common_model->deleteStatusChangeByMulipleFields($find_item_id->id, 'item_id', $outlet[0]->id, 'outlet_id', 'tbl_set_opening_stocks');
+                } else {
+                    $this->Common_model->deleteStatusChange($find_item_id->id, "tbl_items");
+                    $this->Common_model->childItemDeleteStatusChange($find_item_id->id, "tbl_items");
+                    $this->Common_model->openingStockItemDeleteStatusChange($find_item_id->id);
+                }
                 $response = [
                     'status' => 200,
                     'data' => 'Item Deleted Successfully',
+                    'outlet' => $outlet[0]->id,
+                    'outlet_id' => $outlet->id,
+                    'outlet_data' => $outlet,
                 ];
             } else {
                 $response = array(

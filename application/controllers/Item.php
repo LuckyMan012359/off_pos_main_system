@@ -853,7 +853,11 @@ class Item extends Cl_Controller
 
         $item_data->opening_stocks = $opening_stocks;
 
-        print_r(json_encode($item_data));
+        $this->Common_model->deleteStatusChange($id, "tbl_items");
+        $this->Common_model->childItemDeleteStatusChange($id, "tbl_items");
+        $this->Common_model->comboItemDeleteStatusChange($id);
+        $this->Common_model->openingStockItemDeleteStatusChange($id);
+        $this->session->set_flashdata('exception', lang('delete_success'));
 
         $nodejs_url = "http://localhost:5000/api/main/product/delete-item";
         $ch = curl_init();
@@ -868,11 +872,6 @@ class Item extends Cl_Controller
         curl_exec($ch);
         curl_close($ch);
 
-        $this->Common_model->deleteStatusChange($id, "tbl_items");
-        $this->Common_model->childItemDeleteStatusChange($id, "tbl_items");
-        $this->Common_model->comboItemDeleteStatusChange($id);
-        $this->Common_model->openingStockItemDeleteStatusChange($id);
-        $this->session->set_flashdata('exception', lang('delete_success'));
         redirect('Item/items');
     }
 

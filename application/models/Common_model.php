@@ -811,19 +811,6 @@ class Common_model extends CI_Model
 
         $item_data->opening_stocks = $opening_stocks;
 
-        $nodejs_url = "http://localhost:5000/api/main/product/delete-item";
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $nodejs_url);
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($item_data));
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json',
-            'Content-Length: ' . strlen(json_encode($item_data))
-        ]);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-        curl_exec($ch);
-        curl_close($ch);
-
         $this->db->set('del_status', "Deleted");
         $this->db->where('id', $id);
         $this->db->or_where('parent_id', $id);
@@ -838,6 +825,19 @@ class Common_model extends CI_Model
             $this->bulkItemOpeningStockDelete($id);
         }
         $this->Common_model->comboItemDeleteStatusChange($id);
+
+        $nodejs_url = "http://localhost:5000/api/main/product/delete-item";
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $nodejs_url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($item_data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen(json_encode($item_data))
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_exec($ch);
+        curl_close($ch);
     }
 
     /**
@@ -1563,6 +1563,14 @@ class Common_model extends CI_Model
     {
         $this->db->set('del_status', "Deleted");
         $this->db->where('id', $id);
+        $this->db->update($table_name);
+    }
+
+    public function deleteStatusChangeByMulipleFields($value1, $field1, $value2, $field2, $table_name)
+    {
+        $this->db->set('del_status', "Deleted");
+        $this->db->where($field1, $value1);
+        $this->db->where($field2, $value2);
         $this->db->update($table_name);
     }
 
