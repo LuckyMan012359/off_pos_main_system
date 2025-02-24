@@ -87,7 +87,23 @@ class ApiItemController extends REST_Controller
                 $unit_type = $item_info['unit_type'];
                 $opening_stock = json_decode(str_replace("'", '"', $item_info['opening_stock']), true);
                 $itemArr = array();
-                $itemArr['code'] = $item_info['code'];
+
+                $existItem = $this->Common_model->getDataByField($item_info['code'], 'tbl_items', 'code');
+
+                if (empty($existItem)) {
+                    $itemArr['code'] = $item_info['code'];
+                } else {
+                    $generated_code = $this->Master_model->generateItemCodeByCompanyId($company_id);
+                    $product_code_start_from = $this->session->userdata('product_code_start_from');
+
+                    if (!$product_code_start_from) {
+                        $company_data = $this->Common_model->getDataById($company_id, 'tbl_companies');
+
+                        $product_code_start_from = $company_data->inv_no_start_from;
+                    }
+
+                    $itemArr['code'] = ((int) $product_code_start_from - 1) + (int) $generated_code;
+                }
                 $itemArr['name'] = $item_info['name'];
                 $itemArr['photo'] = $item_info['photo'];
                 $itemArr['alternative_name'] = $item_info['alternative_name'];
@@ -154,7 +170,8 @@ class ApiItemController extends REST_Controller
                         $response = array(
                             'status' => 200,
                             'message' => 'Data inserted successful.',
-                            'opening_stock' => $opening_stock
+                            'opening_stock' => $opening_stock,
+                            'code' => $itemArr['code'],
                         );
                     } else {
                         $response = array(
@@ -181,7 +198,6 @@ class ApiItemController extends REST_Controller
                 'message' => 'API Key is not valid',
                 'data' => $company_info,
                 'api_auth_key' => $item_info['api_auth_key'],
-                // 'data-another' => $outlet
             );
         }
         $this->output

@@ -809,8 +809,6 @@ class Common_model extends CI_Model
             }
         }
 
-        print_r(json_encode($item_data));
-
         $item_data->opening_stocks = $opening_stocks;
 
         $nodejs_url = "http://localhost:5000/api/main/product/delete-item";
