@@ -2132,6 +2132,13 @@ class Common_model extends CI_Model
         $this->db->update($table_name, $data);
     }
 
+    public function updateOpeningStockByBulkColumn($data, $item_id, $outlet_id)
+    {
+        $this->db->where('item_id', $item_id);
+        $this->db->where('outlet_id', $outlet_id);
+        $this->db->update('tbl_set_opening_stocks', $data);
+    }
+
     /**
      * deletingMultipleFormData
      * @access public
@@ -2144,6 +2151,14 @@ class Common_model extends CI_Model
     public function deletingMultipleFormData($field_name, $primary_table_id, $table_name)
     {
         $this->db->delete($table_name, array($field_name => $primary_table_id));
+    }
+
+    public function deletingByMulipleFields($field_name_1, $field_value_1, $field_name_2, $field_value_2, $table_name)
+    {
+        $this->db->delete($table_name, array(
+            $field_name_1 => $field_value_1,
+            $field_name_2 => $field_value_2
+        ));
     }
 
     /**

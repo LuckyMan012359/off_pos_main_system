@@ -68,12 +68,12 @@ class Outlet extends Cl_Controller
      * @return void
      */
 
-    private function encryptData($data, $secretKey)
+    public function encryptData($data, $secretKey)
     {
+        $data = urlencode($data);
+
         $iv = openssl_random_pseudo_bytes(16);
-
         $key = hash('sha256', $secretKey, true);
-
         $encrypted = openssl_encrypt($data, 'AES-256-CBC', $key, 0, $iv);
 
         return base64_encode($iv . $encrypted);

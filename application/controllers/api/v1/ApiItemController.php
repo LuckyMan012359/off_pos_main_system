@@ -272,6 +272,13 @@ class ApiItemController extends REST_Controller
         $item_code = $item_info['code'];
         $find_item_id = getItemData($item_code);
         $outlet = $this->Common_model->getDataByField($item_info['domain'], 'tbl_outlets', 'domain');
+        $response = array(
+            'status' => 500,
+            'message' => 'API Key is not valid',
+            'item_info' => $item_info,
+            'opening_stock_data' => json_decode($item_info['opening_stock']),
+
+        );
         if ($find_item_id && $outlet) {
             $item_updated_id = $find_item_id->id;
             $company_info = getCompanyInfoByAPIKey($item_info['api_auth_key']);
@@ -349,12 +356,92 @@ class ApiItemController extends REST_Controller
                     );
                 }
                 $this->Common_model->updateInformation($itemArr, $item_updated_id, "tbl_items");
-                $this->Common_model->deletingMultipleFormData('item_id', $item_updated_id, 'tbl_set_opening_stocks');
-                $this->saveOpeningStock($opening_stock, $item_info['type'], $item_info['conversion_rate'], $item_updated_id, $itemArr['user_id'], $company_id);
+
+                $outlet_id = $this->Common_model->fieldNameCheckingByFieldNameForAPI($item_info['domain'], 'domain', 'tbl_outlets', $user_id, $company_id);
+
+                $this->Common_model->deletingByMulipleFields('item_id', $item_updated_id, 'outlet_id', $outlet_id, 'tbl_set_opening_stocks');
+                $this->updateOpeningStock($opening_stock, $item_info['type'], $item_info['conversion_rate'], $item_updated_id, $user_id, $company_id, $item_info['domain']);
+
+                $opening_stocks = $this->Common_model->getDataByField($item_updated_id, 'tbl_set_opening_stocks', 'item_id');
+
+                $openingStockData = [];
+
+                if ($itemArr['type'] != 'Variation_Product') {
+                    foreach ($opening_stocks as $key => $op_stock) {
+                        $outlet_data = $this->Common_model->getDataById($op_stock->outlet_id, 'tbl_outlets');
+                        $openingStockData[] = [
+                            "outlet_id" => $outlet_data->id,
+                            "outlet_name" => $outlet_data->outlet_name,
+                            "api_key" => $outlet_data->token,
+                            "domain" => $outlet_data->domain,
+                            "quantity" => $op_stock->stock_quantity,
+                            "conversion_rate" => $item_info['conversion_rate'],
+                            "item_description" => $op_stock->item_description
+                        ];
+                    }
+                }
+
+                if ($itemArr['type'] == 'Combo_Product') {
+                    if (isset($_POST['combo_item_qty']) && $_POST['combo_item_qty']) {
+                        foreach ($_POST['combo_item_qty'] as $key => $combo_item) {
+                            $openingStockData[] = [
+                                "combo_item_id" => $key,
+                                "combo_item_quantity" => $combo_item,
+                            ];
+                        }
+                    }
+                }
+
+                $item_info['opening_stock_data'] = json_encode($openingStockData);
+                $item_info['p_type'] = $item_info['type'];
+
+                if ($item_info['unit_type'] == 'Single Unit') {
+                    $item_info['unit_type'] = 1;
+                } else if ($item_info['unit_type'] == 'Double Unit') {
+                    $item_info['unit_type'] = 2;
+                }
+
+                // $nodejs_url = "http://localhost:5000/api/main/product/update-item";
+                // $ch = curl_init();
+                // curl_setopt($ch, CURLOPT_URL, $nodejs_url);
+                // curl_setopt($ch, CURLOPT_POST, 1);
+                // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($item_info));
+                // curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                //     'Content-Type: application/json',
+                //     'Content-Length: ' . strlen(json_encode($item_info))
+                // ]);
+                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                // curl_exec($ch);
+                // curl_close($ch);
+
+                $fmi = array();
+                $fmi['item_id'] = $item_updated_id;
+                $fmi['item_type'] = $item_info['type'];
+                $fmi['item_description'] = $opening_stock[0]['item_description'];
+                $fmi['stock_quantity'] = $opening_stock[0]['quantity'] * $item_info['conversion_rate'];
+                $fmi['outlet_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($item_info['domain'], 'domain', 'tbl_outlets', $user_id, $company_id);
+                $fmi['user_id'] = $user_id;
+                $fmi['company_id'] = $company_id;
+
+                foreach ($opening_stock as $key => $value) {
+                    $fmi[$key] = $value;
+                }
+
                 if ($item_updated_id) {
                     $response = array(
                         'status' => 200,
-                        'message' => 'Data updated successful.'
+                        'message' => 'Data updated successful.',
+                        'data' => $opening_stock,
+                        'item_info' => $item_info,
+                        'itemArr' => $itemArr,
+                        'type' => $item_info['type'],
+                        'conversation_rate' => $item_info['conversion_rate'],
+                        'updated_item_id' => $item_updated_id,
+                        'user_id' => $user_id,
+                        'company_id' => $company_id,
+                        'outlet_id' => $this->Common_model->fieldNameCheckingByFieldNameForAPI($item_info['domain'], 'domain', 'tbl_outlets', $user_id, $company_id),
+                        'item_description' => $opening_stock[0]['item_description'],
+                        'fmi' => $fmi
                     );
                 } else {
                     $response = array(
@@ -449,6 +536,23 @@ class ApiItemController extends REST_Controller
         }
     }
 
+    public function updateOpeningStock($opening_stock, $item_type, $conversion_rate, $insertedId, $user_id, $company_id, $domain)
+    {
+        foreach ($opening_stock as $key => $op_stock) {
+            $fmi = array();
+            $fmi['item_id'] = $insertedId;
+            $fmi['item_type'] = $item_type;
+            $fmi['item_description'] = $op_stock['item_description'];
+            $fmi['stock_quantity'] = $op_stock['quantity'] * $conversion_rate;
+            $fmi['outlet_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($domain, 'domain', 'tbl_outlets', $user_id, $company_id);
+            $fmi['user_id'] = $user_id;
+            $fmi['company_id'] = $company_id;
+            if ($op_stock['quantity'] != '') {
+                $this->Common_model->insertInformation($fmi, 'tbl_set_opening_stocks');
+            }
+
+        }
+    }
 }
 
 ?>

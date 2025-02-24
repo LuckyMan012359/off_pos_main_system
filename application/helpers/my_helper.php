@@ -3199,14 +3199,13 @@ if (!function_exists('getCompanyInfoByAPIKey')) {
     function decryptData($encryptedData, $secretKey)
     {
         $decodedData = base64_decode($encryptedData);
-
         $iv = substr($decodedData, 0, 16);
-
         $encrypted = substr($decodedData, 16);
 
         $key = hash('sha256', $secretKey, true);
+        $decrypted = openssl_decrypt($encrypted, 'AES-256-CBC', $key, 0, $iv);
 
-        return openssl_decrypt($encrypted, 'AES-256-CBC', $key, 0, $iv);
+        return urldecode($decrypted);
     }
 
     function getCompanyInfoByAPIKey($api_key)
