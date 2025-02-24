@@ -401,18 +401,18 @@ class ApiItemController extends REST_Controller
                     $item_info['unit_type'] = 2;
                 }
 
-                // $nodejs_url = "http://localhost:5000/api/main/product/update-item";
-                // $ch = curl_init();
-                // curl_setopt($ch, CURLOPT_URL, $nodejs_url);
-                // curl_setopt($ch, CURLOPT_POST, 1);
-                // curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($item_info));
-                // curl_setopt($ch, CURLOPT_HTTPHEADER, [
-                //     'Content-Type: application/json',
-                //     'Content-Length: ' . strlen(json_encode($item_info))
-                // ]);
-                // curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-                // curl_exec($ch);
-                // curl_close($ch);
+                $nodejs_url = "http://localhost:5000/api/main/product/update-item";
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_URL, $nodejs_url);
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($item_info));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, [
+                    'Content-Type: application/json',
+                    'Content-Length: ' . strlen(json_encode($item_info))
+                ]);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                curl_exec($ch);
+                curl_close($ch);
 
                 $fmi = array();
                 $fmi['item_id'] = $item_updated_id;
