@@ -3227,9 +3227,9 @@ if (!function_exists('getCompanyInfoByAPIKey')) {
         $CI->db->where("phone", $outlet_data["phone"]);
         $result = $CI->db->get()->row();
 
-        // if (!$result) {
-        //     return null;
-        // }
+        if (!$result) {
+            return null;
+        }
 
         $CI->db->select("*");
         $CI->db->from("tbl_companies");
@@ -3239,6 +3239,28 @@ if (!function_exists('getCompanyInfoByAPIKey')) {
         $company_data = $CI->db->get()->row();
 
         return $company_data ? $company_data : null;
+    }
+
+    function getOutletInfoByAPIKey($api_key)
+    {
+        $decryptString = decryptData($api_key, "pos_system");
+
+        $outlet_data = json_decode($decryptString, true);
+
+        if (!$outlet_data || !isset($outlet_data["email"]) || !isset($outlet_data["name"]) || !isset($outlet_data["address"]) || !isset($outlet_data["phone"])) {
+            return null;
+        }
+
+        $CI = &get_instance();
+        $CI->db->select("*");
+        $CI->db->from("tbl_outlets");
+        $CI->db->where("email", $outlet_data["email"]);
+        $CI->db->where("outlet_name", $outlet_data["name"]);
+        $CI->db->where("address", $outlet_data["address"]);
+        $CI->db->where("phone", $outlet_data["phone"]);
+        $result = $CI->db->get()->row();
+
+        return $result ? $result : null;
     }
 }
 

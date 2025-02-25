@@ -62,8 +62,9 @@ class ApiSaleController extends REST_Controller
     {
         $sale_info = json_decode(file_get_contents("php://input"), true);
         $company_info = getCompanyInfoByAPIKey($sale_info['api_auth_key']);
+        $outlet_info = getOutletInfoByAPIKey($sale_info['api_auth_key']);
         $error = false;
-        if ($company_info) {
+        if ($company_info && $outlet_info->domain === $sale_info['domain']) {
             $saleErr = [];
             if ($sale_info['customer_name'] == '') {
                 $error = true;
@@ -81,7 +82,7 @@ class ApiSaleController extends REST_Controller
                 $company_id = $company_info->id;
                 $user_id = $company_info->user_id;
                 $saleArr = array();
-                $saleArr['customer_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['customer_name'], 'name', 'tbl_customers', $user_id, $company_id);
+                $saleArr['customer_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['customer_name'], 'name', 'tbl_customers', 0, $company_id);
                 $saleArr['total_items'] = $sale_info['total_items'];
                 $saleArr['sub_total'] = $sale_info['sub_total'];
                 $saleArr['paid_amount'] = $sale_info['paid_amount'];
@@ -103,7 +104,7 @@ class ApiSaleController extends REST_Controller
                 $saleArr['sale_date'] = date('Y-m-d');
                 $saleArr['date_time'] = date('Y-m-d H:i:s');
                 $saleArr['grand_total'] = $sale_info['grand_total'];
-                $saleArr['delivery_partner_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['delivery_partner_name'], 'partner_name', 'tbl_delivery_partners', $user_id, $company_id);
+                $saleArr['delivery_partner_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['delivery_partner_name'], 'partner_name', 'tbl_delivery_partners', 0, $company_id);
                 $saleArr['delivery_status'] = $sale_info['delivery_status'];
                 $saleArr['due_date_time'] = $sale_info['due_date_time'];
                 $saleArr['account_note'] = $sale_info['account_note'];
@@ -116,7 +117,7 @@ class ApiSaleController extends REST_Controller
                 $saleArr['added_date'] = date('Y-m-d H:i:s');
                 ;
                 $saleArr['user_id'] = $user_id;
-                $saleArr['outlet_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['outlet_name'], 'outlet_name', 'tbl_outlets', $user_id, $company_id);
+                $saleArr['outlet_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['outlet_name'], 'outlet_name', 'tbl_outlets', 0, $company_id);
                 $saleArr['company_id'] = $company_id;
                 $sale_details = json_decode(str_replace("'", '"', $sale_info['items']), true);
                 $payment_details = json_decode(str_replace("'", '"', $sale_info['payment_details']), true);
@@ -145,6 +146,8 @@ class ApiSaleController extends REST_Controller
             $response = array(
                 'status' => 500,
                 'message' => 'API Key is not valid',
+                'data' => $sale_info,
+                'outlet_data' => $outlet_info
             );
         }
         $this->output
@@ -191,14 +194,15 @@ class ApiSaleController extends REST_Controller
     public function updateSale_post()
     {
         $find_sale_id = json_decode(file_get_contents("php://input"), true);
-        $sale_id = $find_sale_id['id'];
-        $find_sale_id = $this->Common_model->getFindId($sale_id, 'tbl_sales');
+        $random_code = $find_sale_id['random_code'];
+        $find_sale_id = $this->Common_model->getDataByField($random_code, 'tbl_sales', 'random_code');
         if ($find_sale_id) {
-            $sale_updated_id = $find_sale_id->id;
+            $sale_updated_id = $find_sale_id[0]->id;
             $sale_info = json_decode(file_get_contents("php://input"), true);
+            $outlet_info = getOutletInfoByAPIKey($sale_info['api_auth_key']);
             $company_info = getCompanyInfoByAPIKey($sale_info['api_auth_key']);
             $error = false;
-            if ($company_info) {
+            if ($company_info && $outlet_info->domain === $sale_info['domain']) {
                 $saleErr = [];
                 if ($sale_info['customer_name'] == '') {
                     $error = true;
@@ -245,7 +249,6 @@ class ApiSaleController extends REST_Controller
                     $saleArr['account_type'] = $sale_info['account_type'];
                     $sale_vat_objects = json_decode(str_replace("'", '"', $sale_info['sale_vat_objects']), true);
                     $saleArr['sale_vat_objects'] = json_encode($sale_vat_objects);
-                    $saleArr['random_code'] = $sale_info['random_code'];
                     $saleArr['note'] = $sale_info['note'];
                     $saleArr['order_date_time'] = date("Y-m-d H:i:s");
                     $saleArr['added_date'] = date('Y-m-d H:i:s');
@@ -269,6 +272,7 @@ class ApiSaleController extends REST_Controller
                         $response = array(
                             'status' => 400,
                             'message' => "Sale failded something wrong",
+                            'id' => $find_sale_id[0]->id
                         );
                     }
                 } else {
@@ -282,6 +286,9 @@ class ApiSaleController extends REST_Controller
                 $response = array(
                     'status' => 500,
                     'message' => 'API Key is not valid',
+                    'company_data' => $company_info,
+                    'outlet_data' => $outlet_info,
+                    'sale_info' => $sale_info,
                 );
             }
         } else {
@@ -305,16 +312,27 @@ class ApiSaleController extends REST_Controller
     public function deleteSale_post()
     {
         $find_sale_id = json_decode(file_get_contents("php://input"), true);
-        $sale_id = $find_sale_id['id'];
-        $find_sale_id = $this->Common_model->getFindId($sale_id, 'tbl_sales');
+        $random_code = $find_sale_id['random_code'];
+        $find_sale_id = $this->Common_model->getDataByField($random_code, 'tbl_sales', 'random_code');
         if ($find_sale_id) {
-            $this->Common_model->deleteStatusChange($sale_id, "tbl_sales");
-            $this->Common_model->updatingMultipleFormData('sales_id', $sale_id, 'tbl_sales_details');
-            $this->Common_model->updatingMultipleFormData('sale_id', $sale_id, 'tbl_sale_payments');
-            $response = [
-                'status' => 200,
-                'data' => 'Item Deleted Successfully',
-            ];
+            $sale_id = $find_sale_id[0]->id;
+            $sale_info = json_decode(file_get_contents("php://input"), true);
+            $company_info = getCompanyInfoByAPIKey($sale_info['api_auth_key']);
+            $outlet_info = getOutletInfoByAPIKey($sale_info['api_auth_key']);
+            if ($company_info && $outlet_info->domain === $sale_info['domain']) {
+                $this->Common_model->deleteStatusChange($sale_id, "tbl_sales");
+                $this->Common_model->updatingMultipleFormData('sales_id', $sale_id, 'tbl_sales_details');
+                $this->Common_model->updatingMultipleFormData('sale_id', $sale_id, 'tbl_sale_payments');
+                $response = [
+                    'status' => 200,
+                    'data' => 'Item Deleted Successfully',
+                ];
+            } else {
+                $response = array(
+                    'status' => 500,
+                    'message' => 'API Key is not valid',
+                );
+            }
         } else {
             $response = [
                 'status' => 404,

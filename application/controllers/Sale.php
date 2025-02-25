@@ -367,7 +367,10 @@ class Sale extends Cl_Controller
         $charge_type = htmlspecialcharscustom($this->input->post($this->security->xss_clean('charge_type')));
         $data = array();
         $sub_total_discount_finalize = $this->input->post($this->security->xss_clean('sub_total_discount_finalize'));
-        $data['customer_id'] = trim_checker($order_details->customer_id);
+
+        $customer_id = trim_checker($order_details->customer_id);
+
+        $data['customer_id'] = $customer_id;
         $data['employee_id'] = trim_checker($order_details->select_employee_id);
         $data['total_items'] = trim_checker($order_details->total_items_in_cart);
         $data['sub_total'] = trim_checker($order_details->sub_total);
@@ -556,7 +559,7 @@ class Sale extends Cl_Controller
         $send_data['send_invoice_email'] = $send_invoice_email;
         $send_data['employee_name'] = $employee_name;
 
-
+        $send_data['customer_info'] = $this->Common_model->getDataById($customer_id, 'tbl_customers');
 
         if ($delivery_partner) {
             if ($delivery_partner === '0') {
@@ -611,6 +614,12 @@ class Sale extends Cl_Controller
 
         if ($sale_old_id > 0) {
             $nodejs_url = "http://localhost:5000/api/main/sale/update-sale";
+
+            $saleData = $this->Common_model->getDataById($sales_id, 'tbl_sales');
+
+            if ($saleData) {
+                $send_data['random_code'] = $saleData->random_code;
+            }
         } else {
             $nodejs_url = "http://localhost:5000/api/main/sale/add-sale";
         }
@@ -951,8 +960,6 @@ class Sale extends Cl_Controller
     public function deleteSale($id)
     {
         $id = $this->custom->encrypt_decrypt($id, 'decrypt');
-
-        echo $id;
 
         $send_data = $this->Common_model->getDataById($id, 'tbl_sales');
 
