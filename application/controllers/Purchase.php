@@ -139,6 +139,7 @@ class Purchase extends Cl_Controller
                     $purchase_info['attachment'] = htmlspecialcharscustom($this->input->post($this->security->xss_clean('attachment_p')));
                 }
                 if ($id == "") {
+                    $purchase_info['verify_code'] = getRandomCode(15);
                     $purchase_info['added_date'] = date('Y-m-d H:i:s');
                     $purchase_id = $this->Common_model->insertInformation($purchase_info, "tbl_purchase");
                     $this->savePurchaseDetails($_POST['item_id'], $purchase_id, 'tbl_purchase_details');
@@ -174,7 +175,7 @@ class Purchase extends Cl_Controller
 
                     $purchase_info['outlet_info'] = $this->Common_model->getDataById($purchase_info['outlet_id'], 'tbl_outlets');
 
-                    $nodejs_url = "http://localhost:5000/api/main/purchase/add-item";
+                    $nodejs_url = "http://localhost:5000/api/main/purchase/add-purchase";
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $nodejs_url);
                     curl_setopt($ch, CURLOPT_POST, 1);
@@ -195,6 +196,10 @@ class Purchase extends Cl_Controller
                         $this->savePaymentMethod($_POST['payment_id'], $id, 'tbl_purchase_payments');
                     }
                     $this->session->set_flashdata('exception', lang('update_success'));
+
+                    $purchase_data = $this->Common_model->getDataById($id, 'tbl_purchase');
+
+                    $purchase_info['verify_code'] = $purchase_data->verify_code;
 
                     $code = [];
 
@@ -219,7 +224,7 @@ class Purchase extends Cl_Controller
 
                     $purchase_info['outlet_info'] = $this->Common_model->getDataById($purchase_info['outlet_id'], 'tbl_outlets');
 
-                    $nodejs_url = "http://localhost:5000/api/main/purchase/update-item";
+                    $nodejs_url = "http://localhost:5000/api/main/purchase/update-purchase";
                     $ch = curl_init();
                     curl_setopt($ch, CURLOPT_URL, $nodejs_url);
                     curl_setopt($ch, CURLOPT_POST, 1);
@@ -287,6 +292,18 @@ class Purchase extends Cl_Controller
             }
         }
     }
+
+    function getRandomCode($length)
+    {
+        $result = "";
+        $characters = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        $charactersLength = strlen($characters);
+        for ($i = 0; $i < $length; $i++) {
+            $result .= $characters[rand(0, $charactersLength - 1)];
+        }
+        return $result;
+    }
+
 
 
 
@@ -423,6 +440,29 @@ class Purchase extends Cl_Controller
     public function deletePurchase($id)
     {
         $id = $this->custom->encrypt_decrypt($id, 'decrypt');
+
+        $purchase_data = $this->Common_model->getDataById($id, 'tbl_purchase');
+
+        $outlet_id = $this->session->userdata('outlet_id');
+
+        $outlet_data = $this->Common_model->getDataById($outlet_id, 'tbl_outlets');
+        $purchase_data->api_auth_key = $outlet_data->token;
+        $purchase_data->domain = $outlet_data->domain;
+
+        $nodejs_url = "http://localhost:5000/api/main/purchase/delete-purchase";
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $nodejs_url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($purchase_data));
+        curl_setopt($ch, CURLOPT_HTTPHEADER, [
+            'Content-Type: application/json',
+            'Content-Length: ' . strlen(json_encode($purchase_data))
+        ]);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_exec($ch);
+        curl_close($ch);
+
         $this->Common_model->deleteStatusChangeWithChild($id, $id, "tbl_purchase", "tbl_purchase_details", 'id', 'purchase_id');
         $this->Common_model->deleteStatusChangeByFieldName($id, 'purchase_id', 'tbl_purchase_payments');
         $this->session->set_flashdata('exception', lang('delete_success'));
