@@ -28,10 +28,10 @@
 <div class="main-content-wrapper">
 
 
-<?php
+    <?php
     if ($this->session->flashdata('exception')) {
         echo '<section class="alert-wrapper">
-        <div class="alert alert-success alert-dismissible fade show"> 
+        <div class="alert alert-success alert-dismissible fade show">
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         <div class="alert-body">
         <i class="m-right fa fa-check"></i>';
@@ -59,8 +59,8 @@
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('ref_no'); ?></label>
-                            <input  autocomplete="off" type="text" id="reference_no" readonly
-                                name="reference_no" class="form-control" placeholder="<?php echo lang('ref_no'); ?>"
+                            <input autocomplete="off" type="text" id="reference_no" readonly name="reference_no"
+                                class="form-control" placeholder="<?php echo lang('ref_no'); ?>"
                                 value="<?php echo $pur_ref_no; ?>">
                         </div>
                         <?php if (form_error('reference_no')) { ?>
@@ -73,8 +73,7 @@
                         <div class="form-group">
                             <label><?php echo lang('supplier'); ?> <span class="required_star">*</span></label>
                             <div class="d-flex">
-                                <select  class="form-control select2 op_width_100_p" id="supplier_id"
-                                    name="supplier_id">
+                                <select class="form-control select2 op_width_100_p" id="supplier_id" name="supplier_id">
                                     <option value=""><?php echo lang('select'); ?></option>
                                     <?php
                                     foreach ($suppliers as $splrs) {
@@ -85,9 +84,9 @@
                                     <?php } ?>
                                 </select>
                                 <button type="button" class="new-btn ms-1 add_supplier_by_ajax bg-blue-btn-p-14">
-                                <iconify-icon icon="solar:add-circle-broken" width="22"></iconify-icon>
+                                    <iconify-icon icon="solar:add-circle-broken" width="22"></iconify-icon>
                                 </button>
-                            </div>  
+                            </div>
                             <div class="alert alert-info" id="remaining_balance"></div>
                         </div>
                         <?php if (form_error('supplier_id')) { ?>
@@ -102,7 +101,7 @@
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('date'); ?> <span class="required_star">*</span></label>
-                            <input  autocomplete="off" readonly type="text" name="date"
+                            <input autocomplete="off" readonly type="text" name="date"
                                 class="form-control customDatepicker" placeholder="<?php echo lang('date'); ?>"
                                 value="<?=date('Y-m-d',strtotime('today'))?>">
                         </div>
@@ -118,8 +117,9 @@
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('supplier_invoice_no'); ?></label>
-                            <input  autocomplete="off" type="text" id="invoice_no" name="invoice_no"
-                                class="form-control" placeholder="<?php echo lang('invoice_no'); ?>" value="<?php echo set_value('invoice_no');?>">
+                            <input autocomplete="off" type="text" id="invoice_no" name="invoice_no" class="form-control"
+                                placeholder="<?php echo lang('invoice_no'); ?>"
+                                value="<?php echo set_value('invoice_no');?>">
                         </div>
                         <?php if (form_error('invoice_no')) { ?>
                         <div class="callout callout-danger my-2">
@@ -131,13 +131,14 @@
                     <div class="col-md-6 col-lg-4 mb-3">
                         <div class="form-group">
                             <label><?php echo lang('items'); ?> <span class="required_star">*</span></label>
-                            <select  class="form-control select2 select2-hidden-accessible op_width_100_p"
-                                name="item_id" id="item_id">
+                            <select class="form-control select2 select2-hidden-accessible op_width_100_p" name="item_id"
+                                id="item_id">
                                 <option value=""><?php echo lang('select'); ?></option>
-                                <?php foreach ($items as $value) { 
-                                $string = ($value->parent_name != '' ? $value->parent_name . ' - ' : '') . ($value->name) . ($value->brand_name != '' ? ' - ' . $value->brand_name : '') . ( ' - ' . $value->code); 
+                                <?php foreach ($items as $value) {
+                                $string = ($value->parent_name != '' ? $value->parent_name . ' - ' : '') . ($value->name) . ($value->brand_name != '' ? ' - ' . $value->brand_name : '') . ( ' - ' . $value->code);
                                 ?>
-                                <option value="<?php echo escape_output($value->id) . "|" . $string . "|" . $value->purchase_unit . "|" . $value->purchase_price. "|" . $value->conversion_rate . "|" .  $value->type . "|" .  $value->expiry_date_maintain ?>">
+                                <option
+                                    value="<?php echo escape_output($value->id) . "|" . $string . "|" . $value->purchase_unit . "|" . $value->purchase_price. "|" . $value->conversion_rate . "|" .  $value->type . "|" .  $value->expiry_date_maintain ?>">
                                     <?php echo escape_output($string) ?>
                                 </option>
                                 <?php } ?>
@@ -155,13 +156,14 @@
                     <div class="col-md-6 col-lg-4">
                         <div class="hidden-xs hidden-sm">&nbsp;</div>
                         <div class="d-flex">
-                            <button data-tippy-content="<?php echo lang('item_sync_notification'); ?>" type="button" class="new-btn mt-1 h-40 me-2" id="sync_items">
+                            <button data-tippy-content="<?php echo lang('item_sync_notification'); ?>" type="button"
+                                class="new-btn mt-1 h-40 me-2" id="sync_items">
                                 <iconify-icon icon="solar:refresh-circle-broken" width="22"></iconify-icon>
                             </button>
-                            <button type="button" class="new-btn mt-1 h-40"
-                                id="pull_low_stock_products">
+                            <button type="button" class="new-btn mt-1 h-40" id="pull_low_stock_products">
                                 <iconify-icon icon="solar:arrow-down-broken" width="22"></iconify-icon>
-                                <?php echo lang('pull_low_stock_products'); ?></button>
+                                <?php echo lang('pull_low_stock_products'); ?>
+                            </button>
                         </div>
                     </div>
                     <div class="hidden-lg hidden-sm">&nbsp;</div>
@@ -173,7 +175,9 @@
                                 <thead>
                                     <tr>
                                         <th class="w-5"><?php echo lang('sn'); ?></th>
-                                        <th class="w-20"><?php echo lang('item'); ?>-<?php echo lang('brand'); ?>-<?php echo lang('code'); ?></th>
+                                        <th class="w-20">
+                                            <?php echo lang('item'); ?>-<?php echo lang('brand'); ?>-<?php echo lang('code'); ?>
+                                        </th>
                                         <th class="w-25"><?php echo lang('expiry_date_IME_Serial'); ?></th>
                                         <th class="w-15"><?php echo lang('quantity_amount'); ?></th>
                                         <th class="w-15"><?php echo lang('unit_price'); ?></th>
@@ -187,54 +191,57 @@
                         </div>
                     </div>
                 </div>
-         
+
                 <div class="row justify-content-end">
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3 d-flex align-items-end">
                         <div class="form-group mt-3">
-                            <p><strong><?php echo lang('total_item');?>:</strong> <span class="number_of_item">0</span> (<span class="total_quantity_sum">0</span>)</p>
+                            <p><strong><?php echo lang('total_item');?>:</strong> <span class="number_of_item">0</span>
+                                (<span class="total_quantity_sum">0</span>)</p>
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group mt-3">
                             <label><?php echo lang('discount'); ?>
                                 (<?php echo lang('flat_or_percentage'); ?>)</label>
-                            <input class="form-control discount calculate_op" type="text" onfocus="select()" name="discount" 
-                                id="discount" <?php echo set_value('discount'); ?> placeholder="<?php echo lang('discount_type');?>">
+                            <input class="form-control discount calculate_op" type="text" onfocus="select()"
+                                name="discount" id="discount" <?php echo set_value('discount'); ?>
+                                placeholder="<?php echo lang('discount_type');?>">
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group mt-3">
                             <label><?php echo lang('other'); ?></label>
-                            <input  autocomplete="off" class="form-control integerchk calculate_op"
-                            type="text" name="other" id="other" onfocus="this.select();"
-                            <?php echo set_value('other'); ?> placeholder="<?php echo lang('other');?>">
+                            <input autocomplete="off" class="form-control integerchk calculate_op" type="text"
+                                name="other" id="other" onfocus="this.select();" <?php echo set_value('other'); ?>
+                                placeholder="<?php echo lang('other');?>">
                         </div>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group mt-3">
                             <label><?php echo lang('g_total'); ?> <span class="required_star">*</span></label>
-                            <input class="form-control integerchk1" readonly type="text"
-                                name="grand_total" id="grand_total"
-                                <?php echo set_value('grand_total'); ?> placeholder="<?php echo lang('grand_total');?>">    
+                            <input class="form-control integerchk1" readonly type="text" name="grand_total"
+                                id="grand_total" <?php echo set_value('grand_total'); ?>
+                                placeholder="<?php echo lang('grand_total');?>">
                         </div>
                     </div>
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group mt-3 mb-2">
-                            <label><?php echo lang('payment_methods'); ?> <span
-                                    class="required_star"></span></label>
-                            <select  class="form-control select2 op_width_100_p" id="payment_method_id"
+                            <label><?php echo lang('payment_methods'); ?> <span class="required_star"></span></label>
+                            <select class="form-control select2 op_width_100_p" id="payment_method_id"
                                 name="payment_method_id">
                                 <option value=""><?php echo lang('select'); ?></option>
                                 <?php foreach ($paymentMethods as $ec) { ?>
-                                <option data-type="<?php echo escape_output($ec->name) ?>" value="<?php echo escape_output($ec->id) ?>"
-                                    <?php echo set_select('payment_method_id', $ec->id); ?>><?php echo escape_output($ec->name) ?>
+                                <option data-type="<?php echo escape_output($ec->name) ?>"
+                                    value="<?php echo escape_output($ec->id) ?>"
+                                    <?php echo set_select('payment_method_id', $ec->id); ?>>
+                                    <?php echo escape_output($ec->name) ?>
                                 </option>
                                 <?php } ?>
                             </select>
                         </div>
-                        <table  class="table">
+                        <table class="table">
                             <tbody id="payment_received_type">
                             </tbody>
                         </table>
@@ -252,9 +259,9 @@
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group mt-3">
                             <label><?php echo lang('paid'); ?> <span class="required_star"></span></label>
-                            <input  autocomplete="off" class="form-control integerchk calculate_op"
-                                type="text" name="paid" id="paid" placeholder="<?php echo lang('paid'); ?>" onfocus="this.select();"
-                            <?php echo set_value('paid'); ?> readonly>
+                            <input autocomplete="off" class="form-control integerchk calculate_op" type="text"
+                                name="paid" id="paid" placeholder="<?php echo lang('paid'); ?>" onfocus="this.select();"
+                                <?php echo set_value('paid'); ?> readonly>
                         </div>
                         <?php if (form_error('paid')) { ?>
                         <div class="callout callout-danger my-2">
@@ -270,8 +277,8 @@
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group mt-3">
                             <label><?php echo lang('due'); ?></label>
-                            <input class="form-control integerchk" type="text" name="due" id="due"
-                            readonly <?php echo set_value('due'); ?> placeholder="<?php echo lang('due');?>">
+                            <input class="form-control integerchk" type="text" name="due" id="due" readonly
+                                <?php echo set_value('due'); ?> placeholder="<?php echo lang('due');?>">
                             <div class="alert alert-error error-msg due_id_err_msg_contnr ">
                                 <p id="due_id_err_msg"></p>
                             </div>
@@ -281,8 +288,10 @@
                 <div class="row justify-content-end">
                     <div class="col-sm-6 col-md-6 col-lg-4 col-xl-3">
                         <div class="form-group mt-3">
-                            <label><?php echo lang('attachment'); ?> <span class="required_star">(<?php echo lang('pdf_or_image');?>)</span></label>
-                            <input  class="form-control integerchk1 op_width_100_p" type="file" name="attachment" id="attachment" accept="file/pdf">
+                            <label><?php echo lang('attachment'); ?> <span
+                                    class="required_star">(<?php echo lang('pdf_or_image');?>)</span></label>
+                            <input class="form-control integerchk1 op_width_100_p" type="file" name="attachment"
+                                id="attachment" accept="file/pdf">
                         </div>
                         <?php if (form_error('attachment')) { ?>
                         <div class="callout callout-danger my-2">
@@ -297,7 +306,8 @@
                             <div class="d-flex">
                                 <label><?php echo lang('note');?></label>
                                 <input type="hidden" name="note" id="note_hidden">
-                                <i class="ps-2 fas fa-pen-nib font-a-i noteModalTrigger cursor-pointer new-icon-p-color"></i>
+                                <i
+                                    class="ps-2 fas fa-pen-nib font-a-i noteModalTrigger cursor-pointer new-icon-p-color"></i>
                             </div>
                         </div>
                     </div>
@@ -329,24 +339,25 @@
 
 
 <!-- Suppliers Modal -->
-<div class="modal fade" id="addSupplierModal"  role="dialog">
+<div class="modal fade" id="addSupplierModal" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-            <h4 class="modal-title" id="myModalLabel">
+                <h4 class="modal-title" id="myModalLabel">
                     <?php echo lang('add_supplier'); ?></h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
-                            data-feather="x">×</i></span></button>
-                
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true"><i data-feather="x">×</i></span></button>
+
             </div>
             <div class="modal-body scroll_body">
                 <form id="add_supplier_form">
                     <div class="row">
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mb-3">
-                                <label class="control-label"><?php echo lang('supplier_name'); ?><span class="op_color_red"> *</span></label>
-                                <input type="text" autocomplete="off" class="form-control" name="name" id="name_supplier"
-                                    placeholder="<?php echo lang('supplier_name'); ?>" value="">
+                                <label class="control-label"><?php echo lang('supplier_name'); ?><span
+                                        class="op_color_red"> *</span></label>
+                                <input type="text" autocomplete="off" class="form-control" name="name"
+                                    id="name_supplier" placeholder="<?php echo lang('supplier_name'); ?>" value="">
                                 <div class="alert alert-error error-msg name_err_msg_contnr ">
                                     <p class="name_err_msg"></p>
                                 </div>
@@ -354,7 +365,8 @@
                         </div>
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mb-3">
-                                <label class="control-label"><?php echo lang('contact_person'); ?><span class="op_color_red"> *</span></label>
+                                <label class="control-label"><?php echo lang('contact_person'); ?><span
+                                        class="op_color_red"> *</span></label>
                                 <input autocomplete="off" type="text" id="contact_person" name="contact_person"
                                     class="form-control" placeholder="<?php echo lang('contact_person'); ?>"
                                     value="<?php echo set_value('contact_person'); ?>">
@@ -368,7 +380,8 @@
                                 <label class="control-label"><?php echo lang('phone'); ?><span class="op_color_red">
                                         *</span></label>
                                 <input autocomplete="off" type="text" id="phone" name="phone" class="form-control"
-                                    placeholder="<?php echo lang('phone'); ?>" value="<?php echo set_value('phone'); ?>">
+                                    placeholder="<?php echo lang('phone'); ?>"
+                                    value="<?php echo set_value('phone'); ?>">
                                 <div class="alert alert-error error-msg phone_err_msg_contnr ">
                                     <p class="phone_err_msg"></p>
                                 </div>
@@ -378,7 +391,8 @@
                             <div class="form-group mb-3">
                                 <label class="control-label"><?php echo lang('email'); ?></label>
                                 <input autocomplete="off" type="text" id="email" name="email" class="form-control"
-                                    placeholder="<?php echo lang('email'); ?>" value="<?php echo set_value('email'); ?>">
+                                    placeholder="<?php echo lang('email'); ?>"
+                                    value="<?php echo set_value('email'); ?>">
                                 <div class="alert alert-error error-msg email_err_msg_contnr ">
                                     <p class="email_err_msg"></p>
                                 </div>
@@ -390,15 +404,20 @@
                                     <?php echo lang('opening_balance'); ?>
                                 </label>
                                 <div class="d-flex align-items-center">
-                                    <div class="op_webkit_fill_available"> 
+                                    <div class="op_webkit_fill_available">
                                         <div class="d-flex">
-                                            <input  autocomplete="off" type="text"
-                                                    name="opening_balance" class="form-control mr_3 integerchk"
-                                                    placeholder="<?php echo lang('opening_balance'); ?>"
-                                                    value="<?php echo set_value('opening_balance'); ?>">
-                                                <select name="opening_balance_type" id="opening_balance_type" class="form-control select2">
-                                                <option value="Debit" <?php echo set_select('opening_balance_type', 'Debit'); ?>><?php echo lang('debit');?></option>
-                                                <option value="Credit" <?php echo set_select('opening_balance_type', 'Credit'); ?>><?php echo lang('credit');?></option>
+                                            <input autocomplete="off" type="text" name="opening_balance"
+                                                class="form-control mr_3 integerchk"
+                                                placeholder="<?php echo lang('opening_balance'); ?>"
+                                                value="<?php echo set_value('opening_balance'); ?>">
+                                            <select name="opening_balance_type" id="opening_balance_type"
+                                                class="form-control select2">
+                                                <option value="Debit"
+                                                    <?php echo set_select('opening_balance_type', 'Debit'); ?>>
+                                                    <?php echo lang('debit');?></option>
+                                                <option value="Credit"
+                                                    <?php echo set_select('opening_balance_type', 'Credit'); ?>>
+                                                    <?php echo lang('credit');?></option>
                                             </select>
                                         </div>
                                     </div>
@@ -413,8 +432,9 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mb-3">
                                 <label><?php echo lang('description'); ?></label>
-                                <input  class="form-control" name="description" id="supplier_description"
-                                    placeholder="<?php echo lang('description'); ?> ..." value="<?php echo $this->input->post('description'); ?>">
+                                <input class="form-control" name="description" id="supplier_description"
+                                    placeholder="<?php echo lang('description'); ?> ..."
+                                    value="<?php echo $this->input->post('description'); ?>">
                             </div>
                             <?php if (form_error('description')) { ?>
                             <div class="callout callout-danger my-2">
@@ -425,17 +445,18 @@
                         <div class="col-md-6 col-lg-4">
                             <div class="form-group mb-3">
                                 <label><?php echo lang('address'); ?></label>
-                                <textarea  class="form-control" name="address" id="supplier_address"
+                                <textarea class="form-control" name="address" id="supplier_address"
                                     placeholder="<?php echo lang('address'); ?>"><?php echo $this->input->post('address'); ?></textarea>
                             </div>
                         </div>
-                        
+
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn bg-blue-btn" id="addSupplier">  <?php echo lang('submit'); ?></button>
-                <button type="button" class="btn bg-blue-btn"  data-bs-dismiss="modal"><?php echo lang('close'); ?></button>
+                <button type="button" class="btn bg-blue-btn" id="addSupplier"> <?php echo lang('submit'); ?></button>
+                <button type="button" class="btn bg-blue-btn"
+                    data-bs-dismiss="modal"><?php echo lang('close'); ?></button>
             </div>
         </div>
     </div>
@@ -443,7 +464,7 @@
 
 
 <!-- Cart Previw -->
-<div class="modal fade" id="cartPreviewModal"  role="dialog">
+<div class="modal fade" id="cartPreviewModal" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -457,10 +478,11 @@
             <div class="modal-body">
                 <form class="form-horizontal">
                     <div class="form-group">
-                        <label class="col-sm-4 control-label"><?php echo lang('unit_price'); ?><span class="op_color_red"> *</span></label>
+                        <label class="col-sm-4 control-label"><?php echo lang('unit_price'); ?><span
+                                class="op_color_red"> *</span></label>
                         <div class="mb-3">
-                            <input type="text" autocomplete="off" class="form-control integerchk1"
-                                onfocus="select();" name="unit_price_modal" id="unit_price_modal"
+                            <input type="text" autocomplete="off" class="form-control integerchk1" onfocus="select();"
+                                name="unit_price_modal" id="unit_price_modal"
                                 placeholder="<?php echo lang('unit_price'); ?>" value="">
                         </div>
                     </div>
@@ -470,7 +492,8 @@
                         <div class="input-group">
                             <input type="number" autocomplete="off" min="1" class="form-control integerchk1"
                                 onfocus="select();" name="qty_modal" id="qty_modal"
-                                placeholder="<?php echo lang('quantity_amount'); ?>" value="" aria-describedby="basic-addon">
+                                placeholder="<?php echo lang('quantity_amount'); ?>" value=""
+                                aria-describedby="basic-addon">
                             <span class="modal_item_unit input-group-text new-btn" id="basic-addon"></span>
                         </div>
                         <input type="hidden" id="hidden_input_item_type">
@@ -485,9 +508,11 @@
                         <div class="d-flex">
                             <div class="imeiSerial_add_more">
                             </div>
-                            <div class="bulk_imei_serial_upload tippyBtnCall" data-tippy-content="Bulk IMEI/Serial Import">
+                            <div class="bulk_imei_serial_upload tippyBtnCall"
+                                data-tippy-content="Bulk IMEI/Serial Import">
                                 <div class="uplod_imei_el bulk_import_at_stock mt-2 h-40">
-                                    <iconify-icon icon="solar:upload-minimalistic-broken" width="18" height="18"></iconify-icon>
+                                    <iconify-icon icon="solar:upload-minimalistic-broken" width="18" height="18">
+                                    </iconify-icon>
                                 </div>
                             </div>
                         </div>
@@ -507,7 +532,7 @@
 
 
 <!-- Notice Modal -->
-<div class="modal fade" id="noteModal"  role="dialog">
+<div class="modal fade" id="noteModal" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -521,7 +546,7 @@
             <div class="modal-body">
                 <div class="form-group">
                     <label><?php echo lang('note');?></label>
-                    <textarea  class="form-control" rows="5" id="note_modal" 
+                    <textarea class="form-control" rows="5" id="note_modal"
                         placeholder="<?php echo lang('note');?>"></textarea>
                 </div>
                 <div class="alert alert-error error-msg note_err_msg_contnr ">
@@ -529,8 +554,9 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn bg-blue-btn" id="noteSubmit">  <?php echo lang('submit'); ?></button>
-                <button type="button" class="btn bg-blue-btn"  data-bs-dismiss="modal"><?php echo lang('close'); ?></button>
+                <button type="button" class="btn bg-blue-btn" id="noteSubmit"> <?php echo lang('submit'); ?></button>
+                <button type="button" class="btn bg-blue-btn"
+                    data-bs-dismiss="modal"><?php echo lang('close'); ?></button>
             </div>
         </div>
     </div>
@@ -540,49 +566,51 @@
 
 
 <!-- Bulk Import Modal -->
-<div class="modal fade" id="bulkImportModal"  role="dialog">
+<div class="modal fade" id="bulkImportModal" role="dialog">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <form id="fileUploadForPurchase" enctype="multipart/form-data">
-            <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel">
-                    <?php echo lang('Bulk_Import_For_Purchase');?>
-                </h4>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">
-                        <i data-feather="x">×</i>
-                    </span>
-                </button>
-            </div>
-            <div class="modal-body scroll_body">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="alert alert-error error-msg name_err_msg_contnr">
-                            <p class="name_err_msg"></p>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">
+                        <?php echo lang('Bulk_Import_For_Purchase');?>
+                    </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">
+                            <i data-feather="x">×</i>
+                        </span>
+                    </button>
+                </div>
+                <div class="modal-body scroll_body">
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="alert alert-error error-msg name_err_msg_contnr">
+                                <p class="name_err_msg"></p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-12">
-                        <div class="form-group mb-3">
-                            <label class="control-label"><?php echo lang('Select_Bulk_Import_File');?> <span class="op_color_red"> *</span></label>
-                            <input type="hidden" id="bulk_purchase_item_id">
-                            <input type="hidden" id="bulk_purchase_item_type">
-                            <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+                        <div class="col-12">
+                            <div class="form-group mb-3">
+                                <label class="control-label"><?php echo lang('Select_Bulk_Import_File');?> <span
+                                        class="op_color_red"> *</span></label>
+                                <input type="hidden" id="bulk_purchase_item_id">
+                                <input type="hidden" id="bulk_purchase_item_type">
+                                <input type="file" class="form-control" id="file" name="file" accept=".xlsx">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="submit" class="btn bg-blue-btn">
-                    <?php echo lang('submit'); ?>
-                </button>
-                <a class="btn bg-blue-btn" href="<?php echo base_url() ?>Authentication/downloadPDF/Purchase_Bulk_Import.xlsx">
-                    <?php echo lang('download_sample'); ?>
-                </a>
-                <button type="button" class="btn bg-blue-btn" data-bs-dismiss="modal">
-                    <?php echo lang('close'); ?>
-                </button>
-            </div>
-            </form>  
+                <div class="modal-footer">
+                    <button type="submit" class="btn bg-blue-btn">
+                        <?php echo lang('submit'); ?>
+                    </button>
+                    <a class="btn bg-blue-btn"
+                        href="<?php echo base_url() ?>Authentication/downloadPDF/Purchase_Bulk_Import.xlsx">
+                        <?php echo lang('download_sample'); ?>
+                    </a>
+                    <button type="button" class="btn bg-blue-btn" data-bs-dismiss="modal">
+                        <?php echo lang('close'); ?>
+                    </button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -2555,6 +2555,39 @@ class Common_model extends CI_Model
         return $result;
     }
 
+    public function getItemWithVariationAndOutetIdForDrowdown()
+    {
+        $company_id = $this->session->userdata('company_id');
+        $sql = "SELECT ii.name AS parent_name, i.id, i.name, i.code, i.type, i.expiry_date_maintain, i.purchase_price,i.sale_price,i.last_three_purchase_avg, i.last_purchase_price, i.conversion_rate, pu.unit_name as purchase_unit, su.unit_name as sale_unit, b.name AS brand_name, i.parent_id
+                FROM tbl_items i
+                LEFT JOIN tbl_items ii ON i.parent_id = ii.id
+                LEFT JOIN tbl_brands b ON b.id = i.brand_id
+                LEFT JOIN tbl_units as pu ON i.purchase_unit_id = pu.id
+                LEFT JOIN tbl_units as su ON i.sale_unit_id = su.id
+                WHERE i.type != 'Variation_Product' AND  i.type != 'Service_Product' AND i.company_id = ? AND i.enable_disable_status = 'Enable' AND i.del_status = 'Live'
+                ORDER BY COALESCE(parent_name, i.name) ASC";
+        $itemResult = $this->db->query($sql, array($company_id))->result();
+
+        $result = [];
+
+        $outlet_id = $this->session->userdata("outlet_id");
+
+        foreach ($itemResult as $key => $value) {
+            $this->db->select('*');
+            $this->db->from("tbl_set_opening_stocks");
+            $this->db->where("item_id", $value->id);
+            $this->db->where("outlet_id", $outlet_id);
+            $this->db->where('del_status', 'Live');
+            $openingStockData = $this->db->get()->result();
+
+            if (count($openingStockData) > 0) {
+                $result[] = $value;
+            }
+        }
+
+        return $result;
+    }
+
 
     /**
      * getAllExpenseCategory
