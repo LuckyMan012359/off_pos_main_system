@@ -3131,6 +3131,92 @@ class Common_model extends CI_Model
         }
     }
 
+    public function getCustomerDataByMulipleField($name, $field_name, $table_name, $user_id = "", $company_id = "", $customer_info)
+    {
+        if (!is_string($field_name)) {
+            throw new InvalidArgumentException("Field name must be a string.");
+        }
+
+        $field_name_filter = escape_output($field_name);
+
+        if (!is_string($name)) {
+            throw new InvalidArgumentException("Name must be a string.");
+        }
+
+        $this->db->select("id, $field_name_filter");
+        $this->db->from("$table_name");
+        $this->db->where($field_name_filter, $name);
+        $this->db->where('company_id', $company_id);
+        $this->db->where('del_status', 'Live');
+
+        $result = $this->db->get()->row();
+
+        if ($result) {
+            return $result->id;
+        } else {
+            $data = [];
+            $data[$field_name] = $name;
+            $data['phone'] = $customer_info['phone'];
+            $data['email'] = $customer_info['email'];
+            $data['address'] = $customer_info['address'];
+            $data['opening_balance'] = $customer_info['opening_balance'];
+            $data['opening_balance_type'] = $customer_info['opening_balance_type'];
+            $data['credit_limit'] = $customer_info['credit_limit'];
+            $data['gst_number'] = $customer_info['gst_number'];
+            $data['date_of_birth'] = $customer_info['date_of_birth'];
+            $data['customer_type'] = $customer_info['customer_type'];
+            $data['group_id'] = $customer_info['group_id'];
+            $data['discount'] = $customer_info['discount'];
+            $data['price_type'] = $customer_info['price_type'];
+            $data['same_or_diff_state'] = $customer_info['same_or_diff_state'];
+            $data["added_date"] = date('Y-m-d H:i:s');
+            $data["user_id"] = $user_id;
+            $data["company_id"] = $company_id;
+
+            return $this->insertInformation($data, $table_name);
+        }
+    }
+
+    public function getSupplierDataByMulipleField($name, $field_name, $table_name, $user_id = "", $company_id = "", $supplier_info)
+    {
+        if (!is_string($field_name)) {
+            throw new InvalidArgumentException("Field name must be a string.");
+        }
+
+        $field_name_filter = escape_output($field_name);
+
+        if (!is_string($name)) {
+            throw new InvalidArgumentException("Name must be a string.");
+        }
+
+        $this->db->select("id, $field_name_filter");
+        $this->db->from("$table_name");
+        $this->db->where($field_name_filter, $name);
+        $this->db->where('company_id', $company_id);
+        $this->db->where('del_status', 'Live');
+
+        $result = $this->db->get()->row();
+
+        if ($result) {
+            return $result->id;
+        } else {
+            $data = [];
+            $data[$field_name] = $name;
+            $data['contact_person'] = $supplier_info['contact_person'];
+            $data['phone'] = $supplier_info['phone'];
+            $data['email'] = $supplier_info['email'];
+            $data['opening_balance'] = $supplier_info['opening_balance'];
+            $data['opening_balance_type'] = $supplier_info['opening_balance_type'];
+            $data['address'] = $supplier_info['address'];
+            $data['description'] = $supplier_info['description'];
+            $data["added_date"] = date('Y-m-d H:i:s');
+            $data["user_id"] = $user_id;
+            $data["company_id"] = $company_id;
+
+            return $this->insertInformation($data, $table_name);
+        }
+    }
+
     /**
      * getCounterIdByRegisterId
      * @access public

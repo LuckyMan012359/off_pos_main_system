@@ -82,7 +82,7 @@ class ApiSaleController extends REST_Controller
                 $company_id = $company_info->id;
                 $user_id = $company_info->user_id;
                 $saleArr = array();
-                $saleArr['customer_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['customer_name'], 'name', 'tbl_customers', 0, $company_id);
+                $saleArr['customer_id'] = $this->Common_model->getCustomerDataByMulipleField($sale_info['customer_name'], 'name', 'tbl_customers', 0, $company_id, $sale_info['customer_info']);
                 $saleArr['total_items'] = $sale_info['total_items'];
                 $saleArr['sub_total'] = $sale_info['sub_total'];
                 $saleArr['paid_amount'] = $sale_info['paid_amount'];
@@ -220,7 +220,7 @@ class ApiSaleController extends REST_Controller
                     $company_id = $company_info->id;
                     $user_id = $company_info->user_id;
                     $saleArr = array();
-                    $saleArr['customer_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($sale_info['customer_name'], 'name', 'tbl_customers', $user_id, $company_id);
+                    $saleArr['customer_id'] = $this->Common_model->getCustomerDataByMulipleField($sale_info['customer_name'], 'name', 'tbl_customers', 0, $company_id, $sale_info['customer_info']);
                     $saleArr['total_items'] = $sale_info['total_items'];
                     $saleArr['sub_total'] = $sale_info['sub_total'];
                     $saleArr['paid_amount'] = $sale_info['paid_amount'];
