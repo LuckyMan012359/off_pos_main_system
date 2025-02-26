@@ -399,6 +399,8 @@ class Purchase extends Cl_Controller
                         $this->image_lib->resize();
                     }
                     $this->session->set_userdata('attachment', $file_name);
+
+                    $this->send_file_to_server($file_name);
                 } else {
                     $this->form_validation->set_message('validate_attachment', $this->upload->display_errors());
                     return FALSE;
@@ -407,6 +409,34 @@ class Purchase extends Cl_Controller
                 echo "Something went wrong";
             }
         }
+    }
+
+    private function send_file_to_server($file_name)
+    {
+        $file_path = './uploads/purchase-attachment/' . $file_name;
+
+        $post_fields = [
+            'file' => new CURLFile($file_path),
+            'file_name' => $file_name
+        ];
+
+        $ch = curl_init();
+
+        curl_setopt($ch, CURLOPT_URL, 'http://localhost:5000/upload-attachment');
+        curl_setopt($ch, CURLOPT_POST, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        $response = curl_exec($ch);
+
+        if (curl_errno($ch)) {
+            echo 'cURL Error: ' . curl_error($ch);
+        } else {
+            echo 'File uploaded successfully to the server.';
+        }
+
+        // Close the cURL session
+        curl_close($ch);
     }
 
 

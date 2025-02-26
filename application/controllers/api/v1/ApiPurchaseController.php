@@ -67,6 +67,10 @@ class ApiPurchaseController extends REST_Controller
             $purchaseArr['added_date'] = $purchase_info['added_date'];
             $purchaseArr['verify_code'] = $purchase_info['verify_code'];
 
+            if ($purchase_info['attachment']) {
+                $purchaseArr['attachment'] = $purchase_info['attachment'];
+            }
+
             $item_info = [];
 
             foreach ($purchase_info['code'] as $key => $value) {
@@ -151,6 +155,10 @@ class ApiPurchaseController extends REST_Controller
                 $purchaseArr['user_id'] = 0;
                 $purchaseArr['outlet_id'] = $this->Common_model->fieldNameCheckingByFieldNameForAPI($outlet_info->outlet_name, 'outlet_name', 'tbl_outlets', 0, $company_info->id);
                 $purchaseArr['company_id'] = $company_info->id;
+
+                if ($purchase_info['attachment']) {
+                    $purchaseArr['attachment'] = $purchase_info['attachment'];
+                }
 
                 $item_info = [];
 
@@ -285,6 +293,50 @@ class ApiPurchaseController extends REST_Controller
             $fmi['company_id'] = $this->session->userdata('company_id');
             $this->Common_model->insertInformation($fmi, $table_name);
         endforeach;
+    }
+
+    public function uploadAttachment_post()
+    {
+        $upload_path = FCPATH . 'uploads/purchase-attachment/';
+
+        // Ensure the directory exists
+        if (!is_dir($upload_path)) {
+            mkdir($upload_path, 0777, true);
+        }
+
+        // Configure file upload settings
+        $config['upload_path'] = $upload_path;
+        $config['allowed_types'] = 'jpg|jpeg|png|gif|pdf';
+        // Set a unique name for the uploaded file to avoid collisions
+        $config['file_name'] = $_FILES['photo']['name'];
+
+        $this->load->library('upload', $config);
+
+        // Check for upload success
+        if (!$this->upload->do_upload('photo')) {
+            // Handle upload failure
+            $error = $this->upload->display_errors();
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    'status' => 'error',
+                    'message' => $error
+                ]));
+        } else {
+            // Successfully uploaded
+            $upload_data = $this->upload->data();
+            $file_path = $upload_data['full_path'];
+
+            $this->output
+                ->set_content_type('application/json')
+                ->set_output(json_encode([
+                    'status' => 'success',
+                    'file_path' => $file_path,
+                    'file_name' => $upload_data['file_name'],
+                    'file_size' => $upload_data['file_size'],
+                    'file_type' => $upload_data['file_type']
+                ]));
+        }
     }
 }
 
